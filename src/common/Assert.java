@@ -18,6 +18,12 @@ public class Assert {
         }
     }
 
+    public static <T> void assertEquals(final T expected, final T actual) {
+        if(!expected.equals( actual )) {
+            throwAssertionException( expected, actual );
+        }
+    }
+
     protected static void throwAssertionException(final Object expected, final Object actual) {
         throw new AssertionError( "Expected: " + expected.toString() + " but was " + actual.toString() );
     }

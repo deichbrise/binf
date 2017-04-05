@@ -60,4 +60,23 @@ public class Fraction {
     public void setDenominator( final Integer denominator ) {
         this.denominator = denominator;
     }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+
+        final Fraction fraction = (Fraction) o;
+
+        if ( !numerator.equals( fraction.numerator ) ) return false;
+        return denominator.equals( fraction.denominator );
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = numerator.hashCode();
+        result = 31 * result + denominator.hashCode();
+        return result;
+    }
 }
