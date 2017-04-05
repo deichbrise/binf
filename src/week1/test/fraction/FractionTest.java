@@ -30,7 +30,7 @@ public class FractionTest extends AbstractTest {
         final Fraction fraction = new Fraction( 1, 2 );
         final Fraction factor = new Fraction( 1, 2 );
 
-        final Fraction actual = fraction.multiply( fraction );
+        final Fraction actual = fraction.multiply( factor );
         final Fraction expected = new Fraction( 1, 4 );
 
         assertEquals( expected, actual );
@@ -62,5 +62,15 @@ public class FractionTest extends AbstractTest {
 
         assertEquals( 1, fraction.getNumerator() );
         assertEquals( 2, fraction.getDenominator() );
+    }
+
+    @Test
+    public void testToString() {
+        final Fraction fraction = new Fraction( 1, 4 );
+
+        final String actual = fraction.toString();
+        final String expected = "1/4";
+
+        assertEquals( expected, actual );
     }
 }
