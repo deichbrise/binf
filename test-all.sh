@@ -1,3 +1,4 @@
 #!/bin/bash
 
-./week1.sh
+./build.sh
+java -jar bin/sources.jar

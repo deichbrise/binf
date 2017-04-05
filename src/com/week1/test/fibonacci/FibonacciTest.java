@@ -12,13 +12,10 @@ import com.week1.solution.fibonacci.FibonacciPrinter;
  * @author pascalstammer
  * @version 04.04.17.
  */
+@Test
 public class FibonacciTest extends AbstractTest {
 
     private static Logger log = LogManager.getLogger( FibonacciTest.class );
-
-    public static void main( String[] args ) {
-        run( FibonacciTest.class );
-    }
 
     @Test
     public void testFibonacci() {

@@ -10,7 +10,7 @@ echo "======================================================================"
 echo "EXECUTE Tests Week 1"
 echo "======================================================================"
 
-java -cp bin/sources.jar com.common.TestSuite com.week1.test.fibonacci.FibonacciTest com.week1.test.fraction.FractionTest
+java -jar bin/sources.jar ".*\.week1.*"
 
 if [ $? -eq 1 ]; then
     echo "======================================================================"

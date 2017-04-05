@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: pstammer
+Class-Path: ../lib/classindex-3.3.jar
+Main-Class: com.common.TestSuite

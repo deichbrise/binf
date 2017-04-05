@@ -23,7 +23,7 @@ echo "======================================================================"
 echo "START PACKAGE RESOURCES"
 echo "======================================================================"
 
-cd bin && jar cvf sources.jar com && cd ..
+cd bin && jar cvfm sources.jar ../MANIFEST.MF com ../lib/*.jar META-INF && cd ..
 
 echo "======================================================================"
 echo "FINISH PACKAGE RESOURCES"

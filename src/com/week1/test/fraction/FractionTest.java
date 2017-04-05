@@ -9,11 +9,8 @@ import static com.common.test.Assert.*;
  * @author pascalstammer
  * @version 05.04.17.
  */
+@Test
 public class FractionTest extends AbstractTest {
-
-    public static void main( String[] args ) {
-        run( FractionTest.class );
-    }
 
     @Test
     public void testMultiplyWithInteger() {
