@@ -36,7 +36,8 @@ public class AbstractTest {
         void execute();
     }
 
-    protected static void run(final Class<?> clazz) {
+    public static void run(final Class<?> clazz) {
+        boolean isError = false;
         try {
             final Object instance = clazz.newInstance();
             final Method[] methods = clazz.getMethods();
@@ -48,10 +49,9 @@ public class AbstractTest {
                     runTest( method.getName(), () -> {
                         try {
                             method.invoke( instance, new Object[]{});
-                        } catch ( IllegalAccessException e ) {
+                        } catch ( Exception e ) {
                             e.printStackTrace();
-                        } catch ( InvocationTargetException e ) {
-                            e.printStackTrace();
+                            System.exit( 1 );
                         }
                     } );
                 }

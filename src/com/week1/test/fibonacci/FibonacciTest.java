@@ -38,4 +38,9 @@ public class FibonacciTest extends AbstractTest {
 
         fibonacciPrinter.print( fibonacci );
     }
+
+    @Test
+    public void testFailingBuild() {
+        Assert.assertEquals( 0, 1 );
+    }
 }

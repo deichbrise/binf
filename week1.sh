@@ -10,10 +10,16 @@ echo "======================================================================"
 echo "EXECUTE Tests Week 1"
 echo "======================================================================"
 
-java -cp bin/sources.jar com.week1.test.fibonacci.FibonacciTest
-java -cp bin/sources.jar com.week1.test.fraction.FractionTest
+java -cp bin/sources.jar com.common.TestSuite com.week1.test.fibonacci.FibonacciTest com.week1.test.fraction.FractionTest
 
-
-echo "======================================================================"
-echo "SUCCESS"
-echo "======================================================================"
+if [ $? -eq 1 ]; then
+    echo "======================================================================"
+    echo "ERROR"
+    echo "======================================================================"
+    exit 1
+else
+    echo "======================================================================"
+    echo "SUCCESS"
+    echo "======================================================================"
+    exit 0
+fi
