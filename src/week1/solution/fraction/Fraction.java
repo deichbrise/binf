@@ -1,5 +1,7 @@
 package week1.solution.fraction;
 
+import common.util.NumberUtil;
+
 /**
  * @author pascalstammer
  * @version 05.04.17.
@@ -9,8 +11,14 @@ public class Fraction {
     private Integer denominator;
 
     public Fraction( final Integer numerator, final Integer denominator ) {
-        this.numerator = numerator;
-        this.denominator = denominator;
+        if(denominator == 1) {
+            this.numerator = numerator;
+            this.denominator = denominator;
+        } else {
+            final int gcd = NumberUtil.greatestCommonDivisor( numerator, denominator );
+            this.numerator = numerator / gcd;
+            this.denominator = denominator / gcd;
+        }
     }
 
     public Fraction( final Integer numerator ) {

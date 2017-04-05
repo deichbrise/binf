@@ -12,11 +12,11 @@ public class FractionTest extends AbstractTest {
         run( FractionTest.class );
     }
 
-    public void testMultiplyWithFraction() {
+    public void testMultiplyWithInteger() {
 
     }
 
-    public void testMultiplyWithInteger() {
+    public void testMultiplyWithFraction() {
 
     }
 
