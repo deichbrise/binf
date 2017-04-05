@@ -3,6 +3,8 @@ package week1.test.fibonacci;
 import common.Assert;
 import common.logger.LogManager;
 import common.logger.Logger;
+import common.test.AbstractTest;
+import common.test.Test;
 import week1.solution.fibonacci.Fibonacci;
 import week1.solution.fibonacci.FibonacciPrinter;
 
@@ -10,16 +12,16 @@ import week1.solution.fibonacci.FibonacciPrinter;
  * @author pascalstammer
  * @version 04.04.17.
  */
-public abstract class FibonacciTest {
+public class FibonacciTest extends AbstractTest {
 
     private static Logger log = LogManager.getLogger( FibonacciTest.class );
 
     public static void main( String[] args ) {
-        testFibonacci();
-        testPrintFibonacci();
+        run( FibonacciTest.class );
     }
 
-    public static void testFibonacci() {
+    @Test
+    public void testFibonacci() {
 
         final Fibonacci fibonacci = new Fibonacci( 10 );
 
@@ -29,7 +31,8 @@ public abstract class FibonacciTest {
         Assert.assertArrayEqual(expected, actual);
     }
 
-    public static void testPrintFibonacci() {
+    @Test
+    public void testPrintFibonacci() {
         final Fibonacci fibonacci = new Fibonacci( 10 );
         final FibonacciPrinter fibonacciPrinter = FibonacciPrinter.getInstance();
 
