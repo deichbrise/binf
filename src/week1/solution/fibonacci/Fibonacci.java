@@ -13,10 +13,6 @@ public class Fibonacci implements Iterator<Integer> {
     private Integer previous;
     private int cursor;
 
-    public Fibonacci() {
-        this(Integer.MAX_VALUE);
-    }
-
     public Fibonacci( final Integer max) {
         if(max < 2) {
             throw new RuntimeException();
