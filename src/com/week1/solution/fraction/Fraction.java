@@ -1,6 +1,6 @@
-package week1.solution.fraction;
+package com.week1.solution.fraction;
 
-import common.util.NumberUtil;
+import com.common.util.NumberUtil;
 
 /**
  * @author pascalstammer

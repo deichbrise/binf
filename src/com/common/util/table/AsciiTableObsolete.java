@@ -1,4 +1,4 @@
-package common.util.table;
+package com.common.util.table;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,12 +1,12 @@
-package week1.test.fibonacci;
+package com.week1.test.fibonacci;
 
-import common.Assert;
-import common.logger.LogManager;
-import common.logger.Logger;
-import common.test.AbstractTest;
-import common.test.Test;
-import week1.solution.fibonacci.Fibonacci;
-import week1.solution.fibonacci.FibonacciPrinter;
+import com.common.Assert;
+import com.common.logger.LogManager;
+import com.common.logger.Logger;
+import com.common.test.AbstractTest;
+import com.common.test.Test;
+import com.week1.solution.fibonacci.Fibonacci;
+import com.week1.solution.fibonacci.FibonacciPrinter;
 
 /**
  * @author pascalstammer

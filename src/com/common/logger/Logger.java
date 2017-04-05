@@ -1,4 +1,4 @@
-package common.logger;
+package com.common.logger;
 
 /**
  * @author pascalstammer

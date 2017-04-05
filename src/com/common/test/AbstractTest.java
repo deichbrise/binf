@@ -1,7 +1,7 @@
-package common.test;
+package com.common.test;
 
-import common.logger.LogManager;
-import common.logger.Logger;
+import com.common.logger.LogManager;
+import com.common.logger.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

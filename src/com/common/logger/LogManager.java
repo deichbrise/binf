@@ -1,6 +1,6 @@
-package common.logger;
+package com.common.logger;
 
-import common.logger.impl.SimpleLogger;
+import com.common.logger.impl.SimpleLogger;
 
 /**
  * @author pascalstammer

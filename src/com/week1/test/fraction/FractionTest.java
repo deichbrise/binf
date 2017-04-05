@@ -1,9 +1,9 @@
-package week1.test.fraction;
+package com.week1.test.fraction;
 
-import common.test.AbstractTest;
-import common.test.Test;
-import week1.solution.fraction.Fraction;
-import static common.Assert.*;
+import com.common.test.AbstractTest;
+import com.common.test.Test;
+import com.week1.solution.fraction.Fraction;
+import static com.common.Assert.*;
 
 /**
  * @author pascalstammer

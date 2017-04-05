@@ -1,6 +1,6 @@
-package common.logger.impl;
+package com.common.logger.impl;
 
-import common.logger.Logger;
+import com.common.logger.Logger;
 
 import java.util.Date;
 

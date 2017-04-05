@@ -1,7 +1,7 @@
-package week1.solution.fibonacci;
+package com.week1.solution.fibonacci;
 
-import common.Printer;
-import common.util.table.AsciiTableObsolete;
+import com.common.Printer;
+import com.common.util.table.AsciiTableObsolete;
 
 /**
  * @author pascalstammer

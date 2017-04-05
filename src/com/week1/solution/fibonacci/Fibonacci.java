@@ -1,4 +1,4 @@
-package week1.solution.fibonacci;
+package com.week1.solution.fibonacci;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

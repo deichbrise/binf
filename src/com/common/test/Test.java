@@ -1,4 +1,4 @@
-package common.test;
+package com.common.test;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
