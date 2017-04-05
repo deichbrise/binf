@@ -1,2 +1,4 @@
 language: java
 script: ./test-all.sh
+jdk:
+  - oraclejdk8
