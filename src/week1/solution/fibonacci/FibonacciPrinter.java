@@ -9,6 +9,18 @@ import common.util.table.AsciiTableObsolete;
  */
 public class FibonacciPrinter implements Printer<Fibonacci> {
 
+    private static FibonacciPrinter instance;
+
+    private FibonacciPrinter() {}
+
+    public static FibonacciPrinter getInstance() {
+        if(instance == null) {
+            instance = new FibonacciPrinter();
+        }
+
+        return instance;
+    }
+
     @Override
     public void print( final Fibonacci o ) {
         final AsciiTableObsolete table = new AsciiTableObsolete();

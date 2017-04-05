@@ -8,7 +8,7 @@ public class Assert {
 
     public static <T> void assertArrayEqual(final T[] expected, final T[] actual) {
         if(expected.length != actual.length) {
-            throwAssertionException(expected, actual);
+            throwArrayLengthNotEqualExpection(expected, actual);
         }
 
         for(int i = 0; i < expected.length; i++) {
@@ -19,6 +19,10 @@ public class Assert {
     }
 
     protected static void throwAssertionException(final Object expected, final Object actual) {
+        throw new AssertionError( "Expected: " + expected.toString() + " but was " + actual.toString() );
+    }
 
+    protected static void throwArrayLengthNotEqualExpection(final Object[] expected, final Object[] actual) {
+        throw new AssertionError( "Expected length " + expected.length + " but was " + actual.length );
     }
 }

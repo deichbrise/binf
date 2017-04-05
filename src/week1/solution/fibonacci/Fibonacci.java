@@ -27,6 +27,13 @@ public class Fibonacci implements Iterator<Integer> {
         this.cursor = 0;
     }
 
+    public Fibonacci(final Fibonacci fibonacci) {
+        this.max = fibonacci.max;
+        this.current = 1;
+        this.previous = 0;
+        this.cursor = 0;
+    }
+
     /**
      * Returns {@code true} if the iteration has more elements.
      * (In other words, returns {@code true} if {@link #next} would
@@ -36,7 +43,7 @@ public class Fibonacci implements Iterator<Integer> {
      */
     @Override
     public boolean hasNext() {
-        return (cursor < max);
+        return (cursor <= max);
     }
 
     /**
@@ -62,5 +69,23 @@ public class Fibonacci implements Iterator<Integer> {
         cursor++;
 
         return next;
+    }
+
+    /**
+     * Convert a Fibonacci Iterator to an array. Note, that we create a copy of the actual fibonacci iterator to preserve
+     * current state of the iterator
+     * @param fibonacci
+     * @return
+     */
+    public static Integer[] toArray( final Fibonacci fibonacci) {
+        final Fibonacci copy = new Fibonacci( fibonacci );
+        final Integer length = copy.max + 1;
+        final Integer[] array = new Integer[length];
+
+        int index = 0;
+        while(copy.hasNext()) {
+            array[index++] = copy.next();
+        }
+        return array;
     }
 }

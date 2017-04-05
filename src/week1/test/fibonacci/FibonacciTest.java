@@ -1,9 +1,9 @@
 package week1.test.fibonacci;
 
+import common.Assert;
 import common.logger.LogManager;
 import common.logger.Logger;
 import week1.solution.fibonacci.Fibonacci;
-import week1.solution.fibonacci.FibonacciIterable;
 import week1.solution.fibonacci.FibonacciPrinter;
 
 /**
@@ -15,11 +15,24 @@ public abstract class FibonacciTest {
     private static Logger log = LogManager.getLogger( FibonacciTest.class );
 
     public static void main( String[] args ) {
-        test();
+        testFibonacci();
+        testPrintFibonacci();
     }
 
-    public static void test() {
-        FibonacciPrinter fibonacciPrinter = new FibonacciPrinter();
-        fibonacciPrinter.print( new Fibonacci( 100 ) );
+    public static void testFibonacci() {
+
+        final Fibonacci fibonacci = new Fibonacci( 10 );
+
+        final Integer[] actual = Fibonacci.toArray( fibonacci );
+        final Integer[] expected = new Integer[]{0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55};
+
+        Assert.assertArrayEqual(expected, actual);
+    }
+
+    public static void testPrintFibonacci() {
+        final Fibonacci fibonacci = new Fibonacci( 10 );
+        final FibonacciPrinter fibonacciPrinter = FibonacciPrinter.getInstance();
+
+        fibonacciPrinter.print( fibonacci );
     }
 }
