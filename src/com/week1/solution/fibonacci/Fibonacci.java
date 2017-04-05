@@ -31,11 +31,9 @@ public class Fibonacci implements Iterator<Integer> {
     }
 
     /**
-     * Returns {@code true} if the iteration has more elements.
-     * (In other words, returns {@code true} if {@link #next} would
-     * return an element rather than throwing an exception.)
+     * Returns {@code true} if there is next fibonacci number.
      *
-     * @return {@code true} if the iteration has more elements
+     * @return {@code true} if a next fibonacci number exists
      */
     @Override
     public boolean hasNext() {
@@ -43,15 +41,15 @@ public class Fibonacci implements Iterator<Integer> {
     }
 
     /**
-     * Returns the next element in the iteration.
+     * Returns the next fibonacci number
      *
-     * @return the next element in the iteration
+     * @return the next fibonacci number
      * @throws NoSuchElementException if the iteration has no more elements
      */
     @Override
     public Integer next() {
         if(!hasNext()) {
-            throw new RuntimeException();
+            throw new NoSuchElementException();
         }
 
         Integer next;
@@ -70,8 +68,8 @@ public class Fibonacci implements Iterator<Integer> {
     /**
      * Convert a Fibonacci Iterator to an array. Note, that we create a copy of the actual fibonacci iterator to preserve
      * current state of the iterator
-     * @param fibonacci
-     * @return
+     * @param fibonacci the fibonacci iterator that should converted to an array
+     * @return an array representing the fibonacci number range
      */
     public static Integer[] toArray( final Fibonacci fibonacci) {
         final Fibonacci copy = new Fibonacci( fibonacci );

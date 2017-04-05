@@ -9,8 +9,8 @@ public class Assert {
     /**
      * Prueft ob zwei Arrays die gleiche Laenge haben und ob die Elemente am gleichen Index gleich sind.
      *
-     * @param expected
-     * @param actual
+     * @param expected the expected array
+     * @param actual the actual array
      */
     public static void assertArrayEquals(final int[] expected, final int[] actual) {
         if(expected.length != actual.length) {
@@ -27,8 +27,8 @@ public class Assert {
     /**
      * Prueft ob zwei Arrays die gleiche Laenge haben und ob die Elemente am gleichen Index gleich sind.
      *
-     * @param expected
-     * @param actual
+     * @param expected the expected array
+     * @param actual the actual array
      */
     public static void assertArrayEquals(final float[] expected, final float[] actual) {
         if(expected.length != actual.length) {
@@ -45,8 +45,8 @@ public class Assert {
     /**
      * Prueft ob zwei Arrays die gleiche Laenge haben und ob die Elemente am gleichen Index gleich sind.
      *
-     * @param expected
-     * @param actual
+     * @param expected the expected array
+     * @param actual the actual array
      */
     public static void assertArrayEquals(final double[] expected, final double[] actual) {
         if(expected.length != actual.length) {
@@ -63,8 +63,8 @@ public class Assert {
     /**
      * Prueft ob zwei Arrays die gleiche Laenge haben und ob die Elemente am gleichen Index gleich sind.
      *
-     * @param expected
-     * @param actual
+     * @param expected the expected array
+     * @param actual the actual array
      */
     public static void assertArrayEquals(final boolean[] expected, final boolean[] actual) {
         if(expected.length != actual.length) {
@@ -81,8 +81,8 @@ public class Assert {
     /**
      * Prueft ob zwei Arrays die gleiche Laenge haben und ob die Elemente am gleichen Index gleich sind.
      *
-     * @param expected
-     * @param actual
+     * @param expected the expected array
+     * @param actual the actual array
      */
     public static void assertArrayEquals(final char[] expected, final char[] actual) {
         if(expected.length != actual.length) {
@@ -99,9 +99,9 @@ public class Assert {
     /**
      * Prueft ob zwei Arrays die gleiche Laenge haben und ob die Elemente am gleichen Index gleich sind.
      *
-     * @param expected
-     * @param actual
-     * @param <T>
+     * @param expected the expected array
+     * @param actual the actual array
+     * @param <T> the array entry type
      */
     public static <T> void assertArrayEqual(final T[] expected, final T[] actual) {
         if(expected.length != actual.length) {
@@ -118,9 +118,9 @@ public class Assert {
     /**
      * Prueft ob zwei Instanzen gleich sind.
      *
-     * @param expected
-     * @param actual
-     * @param <T>
+     * @param expected the expected value
+     * @param actual the acual value
+     * @param <T> the object type
      */
     public static <T> void assertEquals(final T expected, final T actual) {
         if(!expected.equals( actual )) {
@@ -130,7 +130,7 @@ public class Assert {
 
     /**
      * Prueft ob uebergebene Instanz nicht null ist.
-     * @param object
+     * @param object that should be not null
      */
     public static void assertNotNull(final Object object) {
         if(object == null) {
@@ -140,7 +140,7 @@ public class Assert {
 
     /**
      * Prueft ob uebergeben Instanz null ist.
-     * @param object
+     * @param object that should be null
      */
     public static void assertNull(final Object object) {
         if(object != null) {
