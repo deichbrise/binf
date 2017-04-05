@@ -1,6 +1,6 @@
 package com.week1.test.fibonacci;
 
-import com.common.Assert;
+import com.common.test.Assert;
 import com.common.logger.LogManager;
 import com.common.logger.Logger;
 import com.common.test.AbstractTest;

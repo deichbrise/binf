@@ -3,7 +3,7 @@ package com.week1.test.fraction;
 import com.common.test.AbstractTest;
 import com.common.test.Test;
 import com.week1.solution.fraction.Fraction;
-import static com.common.Assert.*;
+import static com.common.test.Assert.*;
 
 /**
  * @author pascalstammer
@@ -70,6 +70,17 @@ public class FractionTest extends AbstractTest {
 
         final String actual = fraction.toString();
         final String expected = "1/4";
+
+        assertEquals( expected, actual );
+    }
+
+    @Test
+    public void testDivide() {
+        final Fraction fraction = new Fraction( 1, 4 );
+        final Fraction divider = new Fraction( 1, 4 );
+
+        final Fraction actual = fraction.divide( divider );
+        final Fraction expected = new Fraction( 1 );
 
         assertEquals( expected, actual );
     }
