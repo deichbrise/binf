@@ -12,6 +12,10 @@ Hier werden die Klassen nach bin kompiliert, als JAR gepackt und eine JavaDoc in
 
 ## Tests ausführen
 
-    java -cp bin/sources.jar com.common.TestSuite [Testklassennamen]
+    java -jar bin/sources.jar
 
+Oder spezifische Tests:
+
+    java -jar bin/sources.jar "[regex]"
+    
 Ein Beispielskript liegt unter week1.sh bereit.
