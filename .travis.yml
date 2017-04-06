@@ -1,5 +1,6 @@
 language: java
-script: ./test-all.sh
+script:
+  - ./test-all.sh
 after_success:
   - ./publish-javadoc.sh
 jdk:
