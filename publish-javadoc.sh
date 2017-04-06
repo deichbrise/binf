@@ -1,5 +1,10 @@
+#!/bin/bash
+
+echo "$TRAVIS_REPO_SLUG"
 
 if [ "$TRAVIS_REPO_SLUG" == "deichbrise/binf" ] && [ "$TRAVIS_JDK_VERSION" == "oraclejdk8" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
+
+    echo -e "Publishing javadoc...\n"
     # Get to the Travis build directory, configure git and clone the repo
     cd $HOME
     git config --global user.email "travis@travis-ci.org"
@@ -13,4 +18,6 @@ if [ "$TRAVIS_REPO_SLUG" == "deichbrise/binf" ] && [ "$TRAVIS_JDK_VERSION" == "o
     git add -f .
     git commit -m "Lastest javadoc on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to gh-pages"
     git push -fq origin gh-pages > /dev/null
+
+    echo -e "Published Javadoc to gh-pages.\n"
 fi
