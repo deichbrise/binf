@@ -23,13 +23,17 @@ public class FibonacciPrinter implements Printer<Fibonacci> {
 
     @Override
     public void print( final Fibonacci o ) {
+        final Fibonacci copy = new Fibonacci( o );
         final AsciiTableObsolete table = new AsciiTableObsolete();
         table.addColumn( "n" );
         table.addColumn( "f(n)" );
+
         int index = 0;
-        while(o.hasNext()) {
+        while(copy.hasNext()) {
             int n = index++;
-            table.newRow().addValue( Integer.toString( n ) ).addValue( o.next().toString() );
+            table.newRow()
+                    .addValue( Integer.toString( n ) ) // n
+                    .addValue( copy.next().toString() ); // f(n)
         }
         table.print();
     }
