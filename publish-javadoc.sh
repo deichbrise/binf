@@ -12,7 +12,8 @@ git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/deichbrise/bi
 
 # Commit and Push the Changes
 cd gh-pages
-rm -rf ./*
+git rm -rf *
+rm -rf *
 cp -Rf ../javadoc/* .
 git add -f .
 git commit -m "Lastest javadoc on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to gh-pages"
