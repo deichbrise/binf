@@ -8,7 +8,7 @@ public class TickerTest {
     public static void main( String[] args ) {
 
         Ticker testTicker = Ticker.getInstance ();
-        Ticker neuTicker =Ticker.getInstance ();
+        Ticker neuTicker = Ticker.getInstance ();
 
         if (testTicker == neuTicker) {
             System.out.println ("Singleton klappt");

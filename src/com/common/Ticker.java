@@ -6,7 +6,6 @@ package com.common;
 public class Ticker {
 
     private static Ticker ticker;
-    private static String current = "+++";
 
     private Ticker () {}
 
@@ -19,7 +18,6 @@ public class Ticker {
 
     public static void print (String text) {
 
-        current = "+++"+text;
-        System.out.print(current);
+        System.out.print("+++"+text);
     }
 }

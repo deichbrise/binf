@@ -11,8 +11,8 @@ public class Company {
 
     public Company (String name, double wert) {
 
-        this.name = name;
-        this.wert = wert;
+        setName (name);
+        setWert (wert);
     }
 
     public Company (String name) {
@@ -33,7 +33,7 @@ public class Company {
     public void changeStockPrice (double d) {
         if (!insolvent) {
             Ticker.print(name + " " + d);
-            wert = d;
+            setWert (d);
         }
     }
 
@@ -50,5 +50,19 @@ public class Company {
         } else {
             return " Company is insolvent";
         }
+    }
+
+    public String getName () { return name; }
+
+    public Double getWert () { return wert; }
+
+    private void setName (String name) {
+
+        this.name = name;
+    }
+
+    private void setWert (double wert) {
+
+        this.wert = wert;
     }
 }
