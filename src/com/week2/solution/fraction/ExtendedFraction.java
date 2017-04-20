@@ -37,4 +37,17 @@ public class ExtendedFraction extends Fraction {
     public ExtendedFraction substract(final Fraction fraction) {
         return add(fraction.multiply( -1 ));
     }
+
+    public static Fraction parseFraction(final String s) {
+        if(s.matches( "-?[\\d]+/[1-9]\\d*" )) {
+            boolean isPositive = !s.contains( "-" );
+            final String prep = (!isPositive ? s.replace( "-", "" ) : s);
+            final String[] split = prep.split( "/" );
+            final Integer numerator = Integer.parseInt( split[0] );
+            final Integer denominator = Integer.parseInt( split[1] );
+            return new Fraction( (isPositive ? 1 : -1) * numerator, denominator );
+        } else {
+            throw new RuntimeException( "Cannot parse " + s );
+        }
+    }
 }

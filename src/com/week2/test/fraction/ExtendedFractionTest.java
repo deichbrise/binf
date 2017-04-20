@@ -51,4 +51,25 @@ public class ExtendedFractionTest extends AbstractTest {
 
         Assert.assertEquals( new Fraction(3, 2), actual2 );
     }
+
+    @Test
+    public void testParseFraction() {
+        final String testString1 = "-1/2";
+        final String testString2 = "1/2";
+        final String testString3 = "aisudghiusa";
+
+        Assert.assertEquals( new Fraction( -1, 2 ), ExtendedFraction.parseFraction( testString1 ) );
+        Assert.assertEquals( new Fraction( 1, 2 ), ExtendedFraction.parseFraction( testString2 ) );
+
+        boolean testSucessful = false;
+        try {
+            ExtendedFraction.parseFraction( testString3 );
+        } catch ( final RuntimeException e ) {
+            testSucessful = true;
+        }
+
+        if(!testSucessful) {
+            throw new RuntimeException();
+        }
+    }
 }
