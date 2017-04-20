@@ -13,6 +13,7 @@ if [ -d bin ]; then
 fi
 
 mkdir -p bin
+
 javac -cp ".:lib/*" -d bin $(find ./src/* | grep .java)
 
 echo "======================================================================"
@@ -33,7 +34,7 @@ echo "======================================================================"
 echo "GENERATING JAVADOC"
 echo "======================================================================"
 
-javadoc -d javadoc/ -sourcepath src/ -subpackages com
+javadoc -cp ".:lib/*" -d javadoc/ -sourcepath src/ -subpackages com
 
 echo "======================================================================"
 echo "FINISHED GENERATING JAVADOC"

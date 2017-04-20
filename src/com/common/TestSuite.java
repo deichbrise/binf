@@ -2,18 +2,11 @@ package com.common;
 
 import com.common.logger.LogManager;
 import com.common.logger.Logger;
-import com.common.test.AbstractTest;
 import com.common.test.Test;
 import org.atteo.classindex.ClassFilter;
 import org.atteo.classindex.ClassIndex;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
 
 /**
  * @author pascalstammer
@@ -23,20 +16,17 @@ public class TestSuite {
 
     public static void main( String[] args ) throws ClassNotFoundException {
 
-        for(String s : args) {
-            log.debug( s );
-        }
-        if(args.length == 0) {
-            final Iterable<Class<?>> classes = ClassIndex.getAnnotated( Test.class);
+        if ( args.length == 0 ) {
+            final Iterable<Class<?>> classes = ClassIndex.getAnnotated( Test.class );
 
-            for(final Class<?> clazz : classes) {
+            for ( final Class<?> clazz : classes ) {
                 run( clazz );
             }
-        } else if(args.length == 1) {
-            final Iterable<Class<?>> classes = ClassFilter.only().topLevel().from( ClassIndex.getAnnotated( Test.class) );
+        } else if ( args.length == 1 ) {
+            final Iterable<Class<?>> classes = ClassFilter.only().topLevel().from( ClassIndex.getAnnotated( Test.class ) );
 
-            for(final Class<?> clazz : classes) {
-                if(clazz.getName().matches( args[0] )) {
+            for ( final Class<?> clazz : classes ) {
+                if ( clazz.getName().matches( args[0] ) ) {
                     run( clazz );
                 }
             }
@@ -46,9 +36,9 @@ public class TestSuite {
 
     }
 
-    private static Logger log = LogManager.getLogger(TestSuite.class);
+    private static Logger log = LogManager.getLogger( TestSuite.class );
 
-    private static void runTest(final String testName, final TestRunner testRunner) {
+    private static void runTest( final String testName, final TestRunner testRunner ) {
         try {
             testRunner.execute();
             onSuccess( testName );
@@ -62,7 +52,7 @@ public class TestSuite {
         log.info( "Test finished - " + testName );
     }
 
-    private static void onError( final String testName, final Exception e) {
+    private static void onError( final String testName, final Exception e ) {
         log.error( "Error on test " + testName + ". Message was " + e.getMessage() );
     }
 
@@ -70,7 +60,7 @@ public class TestSuite {
         void execute();
     }
 
-    public static void run(final Class<?> clazz) {
+    public static void run( final Class<?> clazz ) {
         log.info( "Run " + clazz.getName() );
         log.info( "======================================================" );
         try {
@@ -78,12 +68,12 @@ public class TestSuite {
             final Method[] methods = clazz.getMethods();
 
             int testCounter = 0;
-            for(Method method : methods) {
-                if(method.isAnnotationPresent( Test.class )) {
+            for ( Method method : methods ) {
+                if ( method.isAnnotationPresent( Test.class ) ) {
                     testCounter++;
                     runTest( method.getName(), () -> {
                         try {
-                            method.invoke( instance, new Object[]{});
+                            method.invoke( instance, new Object[]{} );
                         } catch ( Exception e ) {
                             e.printStackTrace();
                             System.exit( 1 );
