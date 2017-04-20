@@ -62,6 +62,16 @@ public class FractionTest extends AbstractTest {
     }
 
     @Test
+    public void testNegativeMultiplication() {
+        final Fraction fraction1 = new Fraction( -2, 7 );
+        final Fraction fraction2 = new Fraction( 2, 7 );
+
+        final Fraction actual = fraction1.multiply( fraction2 );
+
+        assertEquals( new Fraction( -4, 49 ), actual );
+    }
+
+    @Test
     public void testToString() {
         final Fraction fraction = new Fraction( 1, 4 );
 

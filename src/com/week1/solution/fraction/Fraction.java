@@ -12,6 +12,7 @@ import com.common.util.NumberUtil;
 public class Fraction {
     final private Integer numerator;
     final private Integer denominator;
+    final private boolean positive;
 
     /**
      * Erstellt einen neuen Bruch. Beim Erstellen wird der Bruch ggf. gekuerzt.
@@ -20,13 +21,14 @@ public class Fraction {
      * @param denominator Nenner
      */
     public Fraction( final Integer numerator, final Integer denominator ) {
+        positive = determineIsPositive( numerator, denominator );
         if(denominator == 1) {
-            this.numerator = numerator;
-            this.denominator = denominator;
+            this.numerator = Math.abs( numerator ) * (positive ? 1 : -1);
+            this.denominator = Math.abs( denominator );
         } else {
-            final int gcd = NumberUtil.greatestCommonDivisor( numerator, denominator );
-            this.numerator = numerator / gcd;
-            this.denominator = denominator / gcd;
+            final int gcd = NumberUtil.greatestCommonDivisor( Math.abs( numerator ), Math.abs( denominator ) );
+            this.numerator = Math.abs( numerator ) / gcd * (positive ? 1 : -1);;
+            this.denominator = Math.abs( denominator ) / gcd;
         }
     }
 
@@ -68,7 +70,7 @@ public class Fraction {
     public Fraction multiply(Fraction... factors) {
         Fraction buffer = this;
         for(Fraction fraction : factors) {
-            buffer = new Fraction( buffer.numerator * fraction.numerator, buffer.denominator * fraction.denominator );
+            buffer = new Fraction( buffer.numerator * fraction.numerator , buffer.denominator * fraction.denominator );
         }
         return buffer;
     }
@@ -81,6 +83,10 @@ public class Fraction {
      */
     public Fraction divide(Fraction divisor) {
         return multiply( new Fraction( divisor.denominator, divisor.numerator ) );
+    }
+
+    protected boolean determineIsPositive( Integer numerator, Integer denominator) {
+        return numerator < 0 && denominator < 0 || numerator > 0 && denominator > 0;
     }
 
     public Integer getNumerator() {
@@ -99,19 +105,21 @@ public class Fraction {
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
-        if ( o == null || getClass() != o.getClass() ) return false;
+        if ( o == null || !getClass().isAssignableFrom( o.getClass() ) ) return false;
 
         final Fraction fraction = (Fraction) o;
 
-        if ( !numerator.equals( fraction.numerator ) ) return false;
-        return denominator.equals( fraction.denominator );
+        if ( positive != fraction.positive ) return false;
+        if ( numerator != null ? !numerator.equals( fraction.numerator ) : fraction.numerator != null ) return false;
+        return !(denominator != null ? !denominator.equals( fraction.denominator ) : fraction.denominator != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = numerator.hashCode();
-        result = 31 * result + denominator.hashCode();
+        int result = numerator != null ? numerator.hashCode() : 0;
+        result = 31 * result + (denominator != null ? denominator.hashCode() : 0);
+        result = 31 * result + (positive ? 1 : 0);
         return result;
     }
 }
