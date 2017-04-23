@@ -1,10 +1,14 @@
-package com.common;
+package com.week2;
 
 /**
  * Created by Julia on 20.04.2017.
  */
 public class StackTest {
-
+    /**
+     * Testet ob der Copy-Constructor funktioniert
+     * Referenzen und Eintraege werden verglichen
+     * @param tester
+     */
     public static void testCopyConstructor (StringStack tester) {
         StringStack copy = new StringStack (tester);
         System.out.print("Kopie und Original identisch?");
@@ -19,7 +23,14 @@ public class StackTest {
         } else {
             System.out.println(" --> nein");
         }
+    }
 
+    /**
+     * Druckt obersten Eintrag
+     * @param tester
+     */
+    public static void printPeek(StringStack tester) {
+        System.out.println(tester.peek());
     }
 
     public static void main (String [] args) {
@@ -34,5 +45,9 @@ public class StackTest {
         keller.push ("Test");
         testCopyConstructor (keller);
 
+        StringStack copy = new StringStack(keller);
+        System.out.println("Oberste Einträge: ");
+        printPeek(keller);
+        printPeek(copy);
     }
 }

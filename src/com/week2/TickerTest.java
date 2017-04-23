@@ -1,4 +1,4 @@
-package com.common;
+package com.week2;
 
 /**
  * Created by Julia on 19.04.2017.
@@ -26,20 +26,23 @@ public class TickerTest {
         if (!adidas.toString().equals("Adidas 301.0")) System.out.println(" nicht");
         System.out.println();
 
+        System.out.println("Sollte eine Zeile sein:");
         adidas.changeStockPrice (401.5);
         fake.changeStockPrice(2);
         google.changeStockPrice(687);
         unknown.changeStockPrice(1);
-        adidas.changeStockPrice(-24);
+        adidas.changeStockPrice(42);
 
-        fake.finalize();
         System.out.println();
-        System.out.println(fake);
-        System.out.println("sollte sein: Company is insolvent");
-        fake = null;
-        System.out.println(fake);
-        System.out.println("sollte sein : null");
+        System.out.println("58 Companies werden auf null gesetzt, Garbage Collector wird aufgerufen:");
+
+        for (int i = 65; i <= 122; i++) {
+            char c = (char) i;
+            Company bla = new Company(Character.toString((char) i), 1);
+            bla = null;
+        }
         System.gc();
+
 
 
 
