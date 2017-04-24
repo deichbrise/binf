@@ -8,61 +8,84 @@ public class Company {
     private String name;
     private Double wert;
     private boolean insolvent = false;
-    private Ticker ticker;
 
-    public Company( String name, double wert ) {
-        setName( name );
-        this.wert = wert;
+    public Company (String name, double wert) {
+        setName (name);
+        setStockPrice (wert);
     }
 
-    public Company( String name ) {
-        this( name, 0 );
+    public Company (String name) {
+        this(name, 0);
     }
 
-    public Company() {
-        this( "unknown", 0 );
+    public Company () {
+        this("unknown", 0);
     }
 
-    public Company( double wert ) {
-        this( "unknown", wert );
+    public Company (double wert) {
+        this ("unknown", wert);
     }
 
-    public void changeStockPrice( double d ) {
-        if ( !insolvent ) {
-            Ticker.getInstance().print( name + " " + d );
-            wert = d;
+    /**
+     * Aktualisiert den Wert einer Company, falls sie noch nicht insolvent ist
+     * und ruft die Print-Methode des Tickers auf
+     * @param d ein Wert
+     */
+    public void changeStockPrice (double d) {
+        if (!insolvent) {
+            setStockPrice(d);
+            Ticker.getInstance().print(name + " " + d);
         }
     }
 
-    public void finalize() {
-        Ticker.getInstance().print( name + " is insolvent" );
+    /**
+     * Destruktor, wird aufgerufen kurz bevor der Garbage Collector das Object zerstoert
+     * Setzt die Company in den Insolvent-Zustand und gibt eine Mitteilung ueber den Ticker aus
+     */
+    protected void finalize () {
+        Ticker.getInstance().print(name + " is insolvent");
         insolvent = true;
     }
 
-    public String toString() {
-        if ( !insolvent ) {
+    /**
+     * Dastellung der Company
+     * @return String der ueber Name und Wert oder ueber Insolvenz informiert
+     */
+    public String toString () {
+        if (!insolvent) {
             return name + " " + wert;
         } else {
             return " Company is insolvent";
         }
     }
 
-    public String getName() {
-        return name;
-    }
+    /**
+     * Erlaubt es von aussen den Namen der Company zu erfahren ohne ihn zu veraendern
+     * @return String name
+     */
+    public String getName() { return name; }
 
-    public Double getWert() {
-        return wert;
-    }
+    /**
+     * Erlaubt es von aussen den Wert der Company zu erfahren, ohne ihn zu veraendern
+     * @return Double wert
+     */
+    public Double getStockPrice() { return wert; }
 
-    private void setName( String name ) {
+    /**
+     * Setzt einmalig den Namen der Firma auf uebergebenen Text
+     * @param name
+     */
+    private void setName (String name) {
         this.name = name;
     }
 
-    protected Ticker getTicker() {
-        if(ticker == null) {
-            ticker = Ticker.getInstance();
-        }
-        return ticker;
+    /**
+     * Setzt den Wert der Firma solange er positiv, also gueltig ist
+     * @param wert
+     * @throws RuntimeException falls uebergebener Wert negativ
+     */
+    private void setStockPrice (double wert) {
+        if (wert < 0) throw new RuntimeException("Stock Value cannot be negative ");
+        this.wert = wert;
     }
 }

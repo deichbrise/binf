@@ -17,21 +17,32 @@ public class StringStack {
      * Erweiterung: Copy-Constructor erzeugt Kopie des StringStacks
      * dabei reicht einfache Wertzuweisung aus, denn Strings sind immutable
      *
-      */
+     */
     public StringStack (StringStack original) {
         this ();
         if (!original.empty()) {
-            StringStack help = new StringStack();
-            while (!original.empty()) {
-                help.push (original.peek());
-                original.pop();
-            }
+            StringStack help = reverse(original);
             while (!help.empty()) {
-                this.push (help.peek());
-                original.push (help.peek());
+                this.push(help.peek());
+                original.push(help.peek());
                 help.pop();
             }
         }
+    }
+
+    /**
+     * Erstellt einen Hilfskeller mit umgedrehter Reihenfolge
+     * Gewuenschter Seiteneffekt: Originalkeller wird leer
+     * @param original Keller mit richtiger Reihenfolge
+     * @return Hilfskeller mit umgedrehter Reihenfolge
+     */
+    private StringStack reverse(StringStack original) {
+        StringStack help = new StringStack();
+        while (!original.empty()) {
+            help.push(original.peek());
+            original.pop();
+        }
+        return help;
     }
 
     private StringStackEntry first;

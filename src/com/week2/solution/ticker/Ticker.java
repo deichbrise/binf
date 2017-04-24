@@ -6,23 +6,26 @@ package com.week2.solution.ticker;
 public class Ticker {
 
     private static Ticker ticker;
-    private static final String SEP = " +++ ";
 
-    private Ticker () {}
+    private Ticker() {}
 
+    /**
+     * Methode um Instanz zu erzeugen, benutzt den private Constructor
+     * Erstellt einmalig einen Singleton oder gibt bestehenden Ticker zurück
+     * @return ticker, neu oder bereits vorhanden
+     */
     public static Ticker getInstance() {
         if (ticker == null) {
-            ticker = new Ticker ();
+            ticker = new Ticker();
         }
         return ticker;
     }
 
-    public void print(final String text) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(SEP);
-        builder.append(text);
-        builder.append(SEP);
-
-        System.out.println(builder.toString());
+    /**
+     * Gibt ohne Zeilenbruch den gegebenen Text aus
+     * @param text
+     */
+    public void print(String text) {
+        System.out.print("+++" + text);
     }
 }
