@@ -14,7 +14,7 @@ fi
 
 mkdir -p bin
 
-javac -cp ".:lib/*" -d bin $(find ./src/* | grep .java)
+javac -cp "lib/*" -d bin $(find ./src/* | grep .java)
 
 echo "======================================================================"
 echo "FINISH COMPILING RESOURCES"
