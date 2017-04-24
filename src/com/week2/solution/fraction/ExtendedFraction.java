@@ -8,6 +8,8 @@ import com.week1.solution.fraction.Fraction;
  */
 public class ExtendedFraction extends Fraction {
 
+    public static final String REGEX_FRACTION = "-?[\\d]+(/[1-9]\\d*)?";
+
     /**
      * Erstellt einen neuen Bruch. Beim Erstellen wird der Bruch ggf. gekuerzt.
      *
@@ -27,6 +29,11 @@ public class ExtendedFraction extends Fraction {
         super( numerator );
     }
 
+    /**
+     * Addition zweier Brueche
+     * @param fraction Bruch der hinzugefügt werden soll
+     * @return den Ergebnisbruch
+     */
     public ExtendedFraction add(final Fraction fraction) {
         final Integer newNumerator = this.getNumerator() * fraction.getDenominator() + fraction.getNumerator() * this.getDenominator();
         final Integer newDenominator = this.getDenominator() * fraction.getDenominator();
@@ -34,20 +41,35 @@ public class ExtendedFraction extends Fraction {
         return new ExtendedFraction( newNumerator, newDenominator );
     }
 
+    /**
+     * Substraktion zweiter Brueche
+     * @param fraction Bruch der vom anderen Bruch substrahiert werden soll
+     * @return den Ergebnisbruch
+     */
     public ExtendedFraction substract(final Fraction fraction) {
         return add(fraction.multiply( -1 ));
     }
 
+    /**
+     * Erzeugt aus einem String einen Bruch, wenn String valide
+     * @param s den zu parsenden String
+     * @return den geparsten Bruch
+     * @throws NumberFormatException wenn der String nicht richtig formatiert ist
+     */
     public static ExtendedFraction parseFraction(final String s) {
-        if(s.matches( "-?[\\d]+/[1-9]\\d*" )) {
+        if(s.matches( REGEX_FRACTION )) {
             boolean isPositive = !s.contains( "-" );
-            final String prep = (!isPositive ? s.replace( "-", "" ) : s);
-            final String[] split = prep.split( "/" );
-            final Integer numerator = Integer.parseInt( split[0] );
-            final Integer denominator = Integer.parseInt( split[1] );
-            return new ExtendedFraction( (isPositive ? 1 : -1) * numerator, denominator );
+            final String[] split = s.replace( "-", "" ).split( "/" );
+            if(split.length > 1) {
+                final Integer numerator = Integer.parseInt( split[0] );
+                final Integer denominator = Integer.parseInt( split[1] );
+                return new ExtendedFraction( (isPositive ? 1 : -1) * numerator, denominator );
+            } else {
+                final Integer numerator = Integer.parseInt( split[0] );
+                return new ExtendedFraction( (isPositive ? 1 : -1) * numerator );
+            }
         } else {
-            throw new RuntimeException( "Cannot parse " + s );
+            throw new NumberFormatException( "Cannot parse " + s );
         }
     }
 }

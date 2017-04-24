@@ -1,4 +1,4 @@
-package com.common;
+package com.week2.solution.stack;
 
 /**
  * A Stack that holds Strings. Works after the LIFO (Last in first out)

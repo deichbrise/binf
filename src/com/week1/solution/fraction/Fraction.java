@@ -26,7 +26,7 @@ public class Fraction {
             this.numerator = Math.abs( numerator ) * (positive ? 1 : -1);
             this.denominator = Math.abs( denominator );
         } else {
-            final int gcd = NumberUtil.greatestCommonDivisor( Math.abs( numerator ), Math.abs( denominator ) );
+            final int gcd = gcd(numerator, denominator);
             this.numerator = Math.abs( numerator ) / gcd * (positive ? 1 : -1);;
             this.denominator = Math.abs( denominator ) / gcd;
         }
@@ -87,6 +87,10 @@ public class Fraction {
 
     protected boolean determineIsPositive( Integer numerator, Integer denominator) {
         return numerator < 0 && denominator < 0 || numerator > 0 && denominator > 0;
+    }
+
+    protected int gcd(final Integer numerator, final Integer denominator) {
+        return NumberUtil.greatestCommonDivisor( Math.abs( numerator ), Math.abs( denominator ) );
     }
 
     public Integer getNumerator() {

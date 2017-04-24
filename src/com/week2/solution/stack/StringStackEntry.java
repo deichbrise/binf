@@ -1,4 +1,4 @@
-package com.common;
+package com.week2.solution.stack;
 
 
 /**

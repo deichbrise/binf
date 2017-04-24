@@ -7,7 +7,7 @@
 ./build.sh
 
 echo "======================================================================"
-echo "EXECUTE Tests Week 1"
+echo "EXECUTE Tests Week 2"
 echo "======================================================================"
 
 java -jar bin/sources.jar ".*\.week2.*"

@@ -24,6 +24,16 @@ public class Assert {
         }
     }
 
+    public static void assertTrue(boolean assertion) {
+        if(!assertion) {
+            throw new AssertionError();
+        }
+    }
+
+    public static void assertFalse(boolean assertiona) {
+        assertTrue( !assertiona );
+    }
+
     /**
      * Prueft ob zwei Arrays die gleiche Laenge haben und ob die Elemente am gleichen Index gleich sind.
      *
