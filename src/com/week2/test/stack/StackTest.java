@@ -11,20 +11,18 @@ import com.week2.solution.stack.StringStack;
 public class StackTest extends AbstractTest {
 
     public static void testCopyConstructor( StringStack tester ) {
-        StringStack copy = new StringStack( tester );
-        System.out.print( "Kopie und Original identisch?" );
-        if ( tester == copy ) {
-            System.out.println( " --> ja" );
+        StringStack copy = new StringStack (tester);
+        System.out.print("Kopie und Original identisch?");
+        if (tester == copy) {
+            System.out.println(" --> ja");
+        } else { System.out.println(" --> nein");}
+        System.out.print("oberster Eintrag identisch?");
+        if (tester.empty()) {
+            System.out.println(" -->keine Eintraege");
+        } else if (tester.peek() == copy.peek()) {
+            System.out.println(" --> ja");
         } else {
-            System.out.println( " --> nein" );
-        }
-        System.out.print( "oberster Eintrag identisch?" );
-        if ( tester.empty() ) {
-            System.out.println( " -->keine Eintraege" );
-        } else if ( tester.peek().equals( copy.peek() ) ) {
-            System.out.println( " --> ja" );
-        } else {
-            System.out.println( " --> nein" );
+            System.out.println(" --> nein");
         }
 
     }
