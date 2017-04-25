@@ -36,7 +36,7 @@ public class TickerTest extends AbstractTest {
         fake.changeStockPrice(2);
         google.changeStockPrice(687);
         unknown.changeStockPrice(1);
-        adidas.changeStockPrice(-24);
+        adidas.changeStockPrice(24);
     }
 
     @Test

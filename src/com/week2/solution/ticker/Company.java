@@ -42,7 +42,7 @@ public class Company {
      * Destruktor, wird aufgerufen kurz bevor der Garbage Collector das Object zerstoert
      * Setzt die Company in den Insolvent-Zustand und gibt eine Mitteilung ueber den Ticker aus
      */
-    protected void finalize () {
+    public void finalize () {
         Ticker.getInstance().print(name + " is insolvent");
         insolvent = true;
     }
