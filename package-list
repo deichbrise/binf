@@ -18,3 +18,8 @@ com.week2.test.stack
 com.week2.test.ticker
 com.week22013.solution.ticker
 com.week22013.solution.ticker.impl
+com.week3.solution.dynamic
+com.week3.solution.equals
+com.week3.solution.geo
+com.week3.test.equals
+com.week3.test.geo
