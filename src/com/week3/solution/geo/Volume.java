@@ -93,11 +93,11 @@ public class Volume extends Geometry implements Comparable<Geometry> {
         for(int i = 0; i < dim; i++) {
             minBuffer[i] = (minCorner.getCoordinate( i ) <= volume.minCorner.getCoordinate( i ))
                     ? minCorner.getCoordinate( i )
-                    : volume.minCorner.getCoordinate( 0 );
+                    : volume.minCorner.getCoordinate( i );
 
             maxBuffer[i] = (maxCorner.getCoordinate( i ) >= volume.maxCorner.getCoordinate( i ))
                     ? maxCorner.getCoordinate( i )
-                    : volume.maxCorner.getCoordinate( 0 );
+                    : volume.maxCorner.getCoordinate( i );
         }
 
         return new Volume( new Point( minBuffer ), new Point( maxBuffer ) );

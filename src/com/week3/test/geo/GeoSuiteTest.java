@@ -61,9 +61,9 @@ public class GeoSuiteTest extends AbstractTest {
     public void testPointCompareTo() {
         Point point = new Point (1, -2, 3, 4.5);
         Point same = new Point (1, -2, 3, 4.5);
-        Point other = new Point(1, -2, -3, 4.5);
+        Point other = new Point(1, -2, -3, 10);
         Assert.assertTrue(point.compareTo(same) == 0);
-        Assert.assertFalse(point.compareTo(other) == 0);
+        Assert.assertTrue(point.compareTo(other) == 0);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class GeoSuiteTest extends AbstractTest {
         Point2D same = new Point2D(5.6, -2);
         Point2D other = new Point2D(-5.6, -2);
         Assert.assertTrue(point.compareTo(same) == 0);
-        Assert.assertFalse(point.compareTo(other) == 0);
+        Assert.assertTrue(point.compareTo(other) == 0);
     }
 
     @Test
