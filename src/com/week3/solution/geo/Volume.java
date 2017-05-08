@@ -16,15 +16,18 @@ public class Volume extends Geometry implements Comparable<Geometry> {
     private final Point maxCorner;
 
     /**
+     * Erstellt ein neues Volumina aus zwei n-dimensionalen Punkten, die in ihrer Dimension übereinstimmen müssen.
+     * Außerdem werden die Koordinaten der zwei Ecken so miteinander verglichen, sodass danach in der einen Ecke die
+     * kleinsten Werte stehen und in der anderen Ecke die groeßten Werte. So lässt sich später einfacher rechnen.
      *
-     * @param minCorner
-     * @param maxCorner
+     * @param minCorner kleine Ecke
+     * @param maxCorner große Ecke
      */
     public Volume(final Point minCorner, final Point maxCorner) {
         super(minCorner.dimensions());
         if(minCorner.dimensions() != maxCorner.dimensions()) {
-            throw new RuntimeException( "Dimensions of minCorner and maxCorner must be equal but are minCorner: " + minCorner.dimensions()
-                    + " maxCorner: " + maxCorner.dimensions());
+            throw new RuntimeException( "Dimensions of minCorner and maxCorner must be equal but are minCorner: "
+                    + minCorner.dimensions() + " maxCorner: " + maxCorner.dimensions());
         }
 
         final int dim = minCorner.dimensions();
@@ -32,8 +35,13 @@ public class Volume extends Geometry implements Comparable<Geometry> {
         final double[] maxBuffer = new double[dim];
 
         for(int i = 0; i < dim; i++) {
-            minBuffer[i] = (minCorner.getCoordinate( i ) <= maxCorner.getCoordinate( i )) ? minCorner.getCoordinate( i ) : maxCorner.getCoordinate( i );
-            maxBuffer[i] = (minCorner.getCoordinate( i ) <= maxCorner.getCoordinate( i )) ? maxCorner.getCoordinate( i ) : minCorner.getCoordinate( i );
+            minBuffer[i] = (minCorner.getCoordinate( i ) <= maxCorner.getCoordinate( i ))
+                    ? minCorner.getCoordinate( i )
+                    : maxCorner.getCoordinate( i );
+
+            maxBuffer[i] = (minCorner.getCoordinate( i ) <= maxCorner.getCoordinate( i ))
+                    ? maxCorner.getCoordinate( i )
+                    : minCorner.getCoordinate( i );
         }
 
         this.minCorner = new Point( minBuffer );
@@ -46,16 +54,27 @@ public class Volume extends Geometry implements Comparable<Geometry> {
         return (int)(this.volume() - o.volume());
     }
 
+    /**
+     * Berechnet sich aus dem Produkt aller Kantenlängen
+     * @return das Volumen
+     */
     @Override
     public double volume() {
         double volumen = 1.0;
         final int dimension = minCorner.dimensions();
         for(int i = 0; i < dimension; i++) {
-            volumen = maxCorner.getCoordinate( i ) - minCorner.getCoordinate( i );
+            volumen *= maxCorner.getCoordinate( i ) - minCorner.getCoordinate( i );
         }
         return volumen;
     }
 
+    /**
+     * Für alle Volumina gleich: Finde größte und kleinste Ecke und erstelle neues Volumina. Das funktioniert sogar
+     * für ein Volumen, dass aus zwei gleichen Punkten aufgespannt wird.
+     *
+     * @param paramGeometry die zu enkapsulierende Geometry
+     * @return ein neues Volumina mit der gleichen Dimension oder null, wenn Dimensionen nicht übereinstimmen
+     */
     @Override
     public Geometry encapsulate( final Geometry paramGeometry ) {
         if(this.dimensions() != paramGeometry.dimensions()) {
@@ -72,10 +91,23 @@ public class Volume extends Geometry implements Comparable<Geometry> {
         final double[] maxBuffer = new double[dim];
 
         for(int i = 0; i < dim; i++) {
-            minBuffer[i] = (minCorner.getCoordinate( i ) <= volume.minCorner.getCoordinate( i )) ? minCorner.getCoordinate( i ) : volume.minCorner.getCoordinate( 0 );
-            maxBuffer[i] = (maxCorner.getCoordinate( i ) >= volume.maxCorner.getCoordinate( i )) ? maxCorner.getCoordinate( i ) : volume.maxCorner.getCoordinate( 0 );
+            minBuffer[i] = (minCorner.getCoordinate( i ) <= volume.minCorner.getCoordinate( i ))
+                    ? minCorner.getCoordinate( i )
+                    : volume.minCorner.getCoordinate( 0 );
+
+            maxBuffer[i] = (maxCorner.getCoordinate( i ) >= volume.maxCorner.getCoordinate( i ))
+                    ? maxCorner.getCoordinate( i )
+                    : volume.maxCorner.getCoordinate( 0 );
         }
 
         return new Volume( new Point( minBuffer ), new Point( maxBuffer ) );
+    }
+
+    public Point getMinCorner() {
+        return minCorner;
+    }
+
+    public Point getMaxCorner() {
+        return maxCorner;
     }
 }
