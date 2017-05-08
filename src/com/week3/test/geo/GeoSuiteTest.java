@@ -1,7 +1,13 @@
 package com.week3.test.geo;
 
 import com.common.test.AbstractTest;
+import com.common.test.Assert;
 import com.common.test.Test;
+import com.week3.solution.geo.Geometry;
+import com.week3.solution.geo.Point;
+import com.week3.solution.geo.Point2D;
+import com.week3.solution.geo.Rectangle;
+import com.week3.solution.geo.Volume;
 
 /**
  * @author pascalstammer
@@ -10,13 +16,17 @@ import com.common.test.Test;
 @Test
 public class GeoSuiteTest extends AbstractTest {
 
+    public static void main( String[] args ) {
+        final GeoSuiteTest instance = new GeoSuiteTest();
+        instance.runAllTests();
+    }
 
     @Test
     public void testPointConstructor() {
         Point point = new Point(6, 4.3, 4.2, -5);
         double[] expected = {6, 4.3, 4.2, -5};
         int dim = point.dimensions();
-        double[] actual = new double[dim - 1];
+        double[] actual = new double[dim];
         for (int i = 0; i < dim; i++) {
             actual[i] = point.getCoordinate(i);
         }
@@ -52,17 +62,17 @@ public class GeoSuiteTest extends AbstractTest {
         Point point = new Point (1, -2, 3, 4.5);
         Point same = new Point (1, -2, 3, 4.5);
         Point other = new Point(1, -2, -3, 4.5);
-        Assert.assertTrue(point.comparable(same) == 0);
-        Assert.assertFalse(point.comparable(other) == 0);
+        Assert.assertTrue(point.compareTo(same) == 0);
+        Assert.assertFalse(point.compareTo(other) == 0);
     }
 
     @Test
     public void testPoint2DCompareTo() {
-        Point2D point = new Point(5.6, -2);
-        Point2D same = new Point(5.6, -2);
-        Point2D other = new Point(-5.6, -2);
-        Assert.assertTrue(point.comparable(same) == 0);
-        Assert.assertFalse(point.comparable(other) == 0);
+        Point2D point = new Point2D(5.6, -2);
+        Point2D same = new Point2D(5.6, -2);
+        Point2D other = new Point2D(-5.6, -2);
+        Assert.assertTrue(point.compareTo(same) == 0);
+        Assert.assertFalse(point.compareTo(other) == 0);
     }
 
     @Test
@@ -73,8 +83,8 @@ public class GeoSuiteTest extends AbstractTest {
         Rectangle rectangle = new Rectangle(one, two);
         Rectangle same = new Rectangle(one, two);
         Rectangle other = new Rectangle(one, three);
-        Assert.assertTrue(rectangle.comparable(same) == 0);
-        Assert.assertFalse(rectangle.comparable(other) == 0);
+        Assert.assertTrue(rectangle.compareTo(same) == 0);
+        Assert.assertFalse(rectangle.compareTo(other) == 0);
     }
 
     @Test
@@ -85,8 +95,8 @@ public class GeoSuiteTest extends AbstractTest {
         Volume volume = new Volume(one, two);
         Volume same = new Volume(one, two);
         Volume other = new Volume(one, three);
-        Assert.assertTrue(volume.comparable(same) == 0);
-        Assert.assertFalse(volume.comparable(other) == 0);
+        Assert.assertTrue(volume.compareTo(same) == 0);
+        Assert.assertFalse(volume.compareTo(other) == 0);
     }
 
     @Test
@@ -122,7 +132,7 @@ public class GeoSuiteTest extends AbstractTest {
         Point one = new Point(1,-3.4,0,8);
         Point two = new Point(3,-2,9.1,0);
         Volume expected = new Volume(one, two);
-        Volume actual = one.encapsulate(two);
+        Geometry actual = one.encapsulate(two);
         Assert.assertTrue(expected.volume() == actual.volume());
     }
 
@@ -131,7 +141,7 @@ public class GeoSuiteTest extends AbstractTest {
         Point2D one = new Point2D(1,-3.4);
         Point2D two = new Point2D(3,-2);
         Rectangle expected = new Rectangle(one, two);
-        Rectangle actual = one.encapsulate(two);
+        Geometry actual = one.encapsulate(two);
         Assert.assertTrue(expected.volume() == actual.volume());
     }
 
@@ -146,7 +156,7 @@ public class GeoSuiteTest extends AbstractTest {
         Rectangle first = new Rectangle(one, two);
         Rectangle second = new Rectangle(three, four);
         Volume expected = new Volume(min, max);
-        Volume actual = first.encapsulate(second);
+        Geometry actual = first.encapsulate(second);
         Assert.assertTrue(expected.volume() == actual.volume());
     }
 
@@ -161,7 +171,7 @@ public class GeoSuiteTest extends AbstractTest {
         Volume first = new Volume(one, two);
         Volume second = new Volume(three, four);
         Volume expected = new Volume(min, max);
-        Volume actual = first.encapsulate(second);
+        Geometry actual = first.encapsulate(second);
         Assert.assertTrue(expected.volume() == actual.volume());
     }
 }
