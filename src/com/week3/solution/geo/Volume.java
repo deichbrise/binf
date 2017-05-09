@@ -81,11 +81,15 @@ public class Volume extends Geometry implements Comparable<Geometry> {
             return null;
         }
 
-        if(!(paramGeometry instanceof Volume)) {
-            throw new RuntimeException( "Only two Volumes can be encapsulate in each other." );
+        // Create a Volume if paramGeometry is Point
+        Volume volume;
+        if(paramGeometry instanceof Volume) {
+            volume = (Volume)paramGeometry;
+        } else {
+            final Point point = (Point)paramGeometry;
+            volume = new Volume( point, point );
         }
 
-        final Volume volume = (Volume)paramGeometry;
         final int dim = minCorner.dimensions();
         final double[] minBuffer = new double[dim];
         final double[] maxBuffer = new double[dim];
