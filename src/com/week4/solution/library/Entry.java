@@ -1,4 +1,4 @@
-package com.week4.library;
+package com.week4.solution.library;
 
 /**
  * An Entry holds an Object <code>o</code> and a reference <code>next</code> to

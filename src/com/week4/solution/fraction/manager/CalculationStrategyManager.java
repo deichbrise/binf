@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.ServiceLoader;
 
 /**
+ * Verwaltet CalculationStrategies
+ *
  * @author pascalstammer
  * @version 15.05.17.
  */

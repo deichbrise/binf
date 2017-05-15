@@ -7,6 +7,8 @@ import com.week4.solution.fraction.manager.CalculationStrategyManager;
 import com.week4.solution.fraction.strategy.CalculationStrategy;
 
 /**
+ * Verarbeitet alle anderen Nummern
+ *
  * @author pascalstammer
  * @version 15.05.17.
  */

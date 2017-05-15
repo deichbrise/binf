@@ -1,4 +1,4 @@
-package com.week4.library;
+package com.week4.solution.library;
 
 /**
  * A simple linked list. One may go through this list by {@link #advance()} until

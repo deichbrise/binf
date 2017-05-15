@@ -1,23 +1,38 @@
 package com.week4.solution.library;
 
 /**
- * @author pascalstammer
- * @version 14.05.17.
+ * Created by Julia on 15.05.2017.
  */
 public class BluRay extends LibraryItem {
     private String title;
     private String director;
 
+    public BluRay(String title, String director) {
+        this.title = title;
+        this.director = director;
+    }
+
+    /**
+     * Returns BluRay's title.
+     * @return title
+     */
     public String getTitle() {
         return title;
     }
 
-    public String getDirector() {
+    /**
+     * Returns name of BluRay's director.
+     * @return director
+     */
+    public  String getDirector() {
         return director;
     }
 
-    @Override
+    /**
+     * Returns information about the BluRay.
+     * @return type: BluRay, title and director
+     */
     public String getDescription() {
-        return getTitle() + " - " + getDirector();
+        return "BluRay: " + title + ", " + director;
     }
 }

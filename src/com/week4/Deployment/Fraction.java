@@ -1,4 +1,4 @@
-package com.week4.Deployment;
+package com.week4.deployment;
 
 /**
  * Created by Julia on 11.05.2017.

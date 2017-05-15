@@ -1,41 +1,62 @@
 package com.week4.solution.library;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
- * @author pascalstammer
- * @version 14.05.17.
+ * Created by Julia on 15.05.2017.
  */
 public class Library {
-    private List<LibraryItem> inventory = new ArrayList<>();
 
-    public void addItem(final LibraryItem item) {
-        inventory.add( item );
+    private List itemList;
+
+    public Library() {
+        itemList = new List();
     }
 
-    public void deleteItem(final LibraryItem item) {
-        inventory.remove( item );
+    /**
+     * Adds new item to existing list of items.
+     * No items with identical description are allowed.
+     * @param item
+     */
+    public void addItem(LibraryItem item) {
+        if(!checkForOccurrence(item)) itemList.add(item);
     }
 
-    public List<LibraryItem> search(final String text) {
-        return fancySearch( text );
+    /**
+     * If list contains item, it is deleted.
+     * @param item
+     */
+    public void deleteItem(LibraryItem item) {
+        if(checkForOccurrence(item)) itemList.delete();
     }
 
-    protected List<LibraryItem> fancySearch(final String text) {
-        return inventory.parallelStream()
-                .filter( item -> item.getDescription().contains( text ) )
-                .collect( Collectors.toList());
-    }
-
-    protected List<LibraryItem> boringSearch(final String text) {
-        final List<LibraryItem> result = new ArrayList<>();
-        for(final LibraryItem libraryItem : inventory) {
-            if(libraryItem.getDescription().contains( text )) {
-                result.add( libraryItem );
-            }
+    /**
+     * Checks if an item is already in the list and keeps the position of it.
+     * Compares items by comparing their descriptions.
+     * @param item
+     * @return true if item exists in list
+     *         false if it does not
+     */
+    private boolean checkForOccurrence(LibraryItem item) {
+        itemList.reset();
+        while(!itemList.endpos()) {
+            if (((LibraryItem)itemList.elem()).getDescription().equals(item.getDescription())) return true;
+            itemList.advance();
         }
-        return result;
+        return false;
+    }
+
+    /**
+     * Goes through whole list and creates a new list with all items containing the searched text.
+     * @param text
+     * @return list with all found items
+     */
+    public List search(String text){
+        List foundList = new List();
+        itemList.reset();
+        while(!itemList.endpos()) {
+            if(((LibraryItem)itemList.elem()).getDescription().contains(text))
+                foundList.add(itemList.elem());
+            itemList.advance();
+        }
+        return foundList;
     }
 }

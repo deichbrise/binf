@@ -26,6 +26,14 @@ public class Calculator {
         calculator.calculate( args[0], args[1], args[2] );
     }
 
+    /**
+     * Berechnet das Ergebnis anhand der übergeben Operanten und dem gegeben Operator. Beendet das Programm mit
+     * einem Fehler-Exit-Code, wenn keine passende Berechnungsmethode gefunden wurde.
+     *
+     * @param operand1 Erster Operand
+     * @param operator Operator: +, -, *, /
+     * @param operand2 Zweiter Operand
+     */
     public void calculate( final String operand1, final String operator, final String operand2) {
         for(CalculationStrategy calculationStrategy : getCalculationStrategies()) {
             if(calculationStrategy.isParseable( operand1, operand2 )) {
@@ -42,6 +50,7 @@ public class Calculator {
         }
         System.out.println("Cannot calculate.");
         printManual();
+        System.exit( 1 );
     }
 
 
