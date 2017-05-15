@@ -21,8 +21,6 @@ com.week3.solution.equals
 com.week3.solution.geo
 com.week3.test.equals
 com.week3.test.geo
-com.week4.Deployment
-com.week4.library
 com.week4.solution.condition
 com.week4.solution.fraction
 com.week4.solution.fraction.manager
@@ -30,3 +28,4 @@ com.week4.solution.fraction.strategy
 com.week4.solution.fraction.strategy.impl
 com.week4.solution.library
 com.week4.test.fraction
+com.week4.test.library
