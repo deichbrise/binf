@@ -24,7 +24,6 @@ echo "======================================================================"
 echo "START PACKAGE RESOURCES"
 echo "======================================================================"
 
-cd bin && jar cvfm sources.jar ../MANIFEST.MF com ../lib/*.jar META-INF && cd ..
 cd bin && jar cvfm calculator.jar ../resources/manifests/calculator/MANIFEST.MF com ../lib/*.jar META-INF && cd ..
 
 echo "======================================================================"
