@@ -7,6 +7,7 @@ import org.atteo.classindex.ClassFilter;
 import org.atteo.classindex.ClassIndex;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * @author pascalstammer
@@ -71,12 +72,25 @@ public class TestSuite {
             for ( Method method : methods ) {
                 if ( method.isAnnotationPresent( Test.class ) ) {
                     testCounter++;
+                    final Class<? extends Exception>[] expectedExceptions = method.getAnnotation( Test.class ).shouldThrow();
                     runTest( method.getName(), () -> {
                         try {
                             method.invoke( instance, new Object[]{} );
+                            if(expectedExceptions.length > 0) {
+                                throw new AssertionError( "Should throw" + Arrays.toString(expectedExceptions) );
+                            }
                         } catch ( Exception e ) {
-                            e.printStackTrace();
-                            System.exit( 1 );
+
+                            boolean isExpected = false;
+                            for(Class<? extends Exception> expected : expectedExceptions) {
+                                if(e.getCause().getClass().equals( expected )) {
+                                    isExpected = true;
+                                    break;
+                                }
+                            }
+                            if(!isExpected) {
+                                e.printStackTrace();
+                            }
                         }
                     } );
                 }

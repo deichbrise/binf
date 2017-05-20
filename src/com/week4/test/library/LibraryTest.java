@@ -53,10 +53,12 @@ public class LibraryTest extends AbstractTest {
         instance.addItem( three );
         List list = instance.search( "Sherlock" );
         Assert.assertTrue( list.empty() );
+
         list = instance.search( "Jane" );
         list.advance();
         list.advance();
         Assert.assertTrue( list.endpos() );
+
         instance.deleteItem( four );
         list = instance.search( "Tarzan" );
         Assert.assertTrue( list.empty() );

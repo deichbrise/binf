@@ -16,4 +16,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @IndexAnnotated
 public @interface Test {
+    Class<? extends Exception>[] shouldThrow() default {};
 }
