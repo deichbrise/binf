@@ -29,3 +29,6 @@ com.week4.solution.fraction.strategy.impl
 com.week4.solution.library
 com.week4.test.fraction
 com.week4.test.library
+com.week5.solution.clone
+com.week5.solution.heap
+com.week5.test
