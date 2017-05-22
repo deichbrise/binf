@@ -14,7 +14,6 @@ public class ArrayHeap<T> extends AbstractHeap<T> implements Heap<T> {
 
     private Comparator<T> comparator;
     private boolean isValidState = true;
-    private Class<T> clazz;
 
     /**
      * Default-Constructor. Impliziert, dass T Compareable implementieren muss.
