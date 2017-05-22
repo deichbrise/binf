@@ -1,4 +1,4 @@
-package com.week5.test;
+package com.week5.test.heap;
 
 import com.common.test.AbstractTest;
 import com.common.test.Assert;
