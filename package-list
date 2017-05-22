@@ -32,4 +32,6 @@ com.week4.test.library
 com.week5.solution.clone
 com.week5.solution.heap
 com.week5.solution.library
+com.week5.test
 com.week5.test.heap
+com.week5.util
