@@ -10,9 +10,9 @@ import java.util.Comparator;
  */
 public class ArrayHeap<T> extends AbstractHeap<T> implements Heap<T> {
 
-    private Object[] entries;
+    private Element<T>[] entries;
 
-    private Comparator<T> comparator;
+    private Comparator<? super T> comparator;
     private boolean isValidState = true;
     private Class<T> clazz;
 
@@ -27,7 +27,7 @@ public class ArrayHeap<T> extends AbstractHeap<T> implements Heap<T> {
      *
      * @param comparator
      */
-    public ArrayHeap( final Comparator<T> comparator ) {
+    public ArrayHeap( final Comparator<? super T> comparator ) {
         this.comparator = comparator;
     }
 
@@ -47,11 +47,11 @@ public class ArrayHeap<T> extends AbstractHeap<T> implements Heap<T> {
 
         if ( entries == null ) {
             entries = arrayCreate( 1 );
-            entries[0] = x;
+            entries[0] = new Element<>(x);
         } else {
-            final Object[] buffer = arrayCreate( entries.length + 1 );
+            final Element<T>[] buffer = arrayCreate( entries.length + 1 );
             System.arraycopy( entries, 0, buffer, 0, entries.length );
-            buffer[buffer.length - 1] = x;
+            buffer[buffer.length - 1] = new Element<>( x );
 
             int currentIndex = buffer.length - 1;
             while ( currentIndex > 0 && compare( buffer[currentIndex], buffer[parent( currentIndex )] ) < 0 ) {
@@ -78,8 +78,8 @@ public class ArrayHeap<T> extends AbstractHeap<T> implements Heap<T> {
         if ( empty() ) {
             throw new ArrayIndexOutOfBoundsException( "Heap does not contain any elements" );
         }
-        final T first = (T) entries[0];
-        final Object[] buffer = arrayCreate( entries.length - 1 );
+        final T first = entries[0].element;
+        final Element<T>[] buffer = arrayCreate( entries.length - 1 );
         System.arraycopy( entries, 1, buffer, 0, buffer.length );
         heapify( buffer, 0 );
         entries = buffer;
@@ -98,7 +98,7 @@ public class ArrayHeap<T> extends AbstractHeap<T> implements Heap<T> {
     @SuppressWarnings("unchecked")
     public T extractMin() {
         assertState();
-        return (T) entries[0];
+        return entries[0].element;
     }
 
     /**
@@ -111,7 +111,7 @@ public class ArrayHeap<T> extends AbstractHeap<T> implements Heap<T> {
         return entries == null || entries.length == 0;
     }
 
-    protected void heapify( Object[] arr, int index ) {
+    protected void heapify( Element<T>[] arr, int index ) {
         int min = index;
         if ( left( index ) < arr.length && compare( arr[left( index )], arr[min] ) < 0 ) {
             min = left( index );
@@ -126,18 +126,18 @@ public class ArrayHeap<T> extends AbstractHeap<T> implements Heap<T> {
     }
 
     @SuppressWarnings("unchecked")
-    protected Object[] arrayCreate( int length ) {
-        return new Object[length];
+    protected Element<T>[] arrayCreate( int length ) {
+        return (Element<T>[]) new Element[length];
     }
 
 
     @SuppressWarnings("unchecked")
-    protected int compare( final Object x1, final Object x2 ) {
+    protected int compare( final Element<T> x1, final Element<T> x2 ) {
 
         if ( comparator != null ) {
-            return comparator.compare( (T) x1, (T) x2 );
+            return comparator.compare( x1.element, x2.element );
         } else {
-            return ((Comparable<T>) x1).compareTo( (T) x2 );
+            return ((Comparable<T>) x1.element).compareTo( x2.element );
         }
     }
 
@@ -162,5 +162,14 @@ public class ArrayHeap<T> extends AbstractHeap<T> implements Heap<T> {
         if ( !isValidState ) {
             throw new IllegalStateException( "The heap is not in a valid state" );
         }
+    }
+
+    private static class Element<E> {
+
+        public Element( final E element ) {
+            this.element = element;
+        }
+
+        E element;
     }
 }
