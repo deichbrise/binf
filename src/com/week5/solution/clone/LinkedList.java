@@ -108,7 +108,7 @@ public class LinkedList<T> implements List<T>, Cloneable {
     }
 
     @Override
-    public List<T> clone() throws CloneNotSupportedException {
+    public LinkedList<T> clone() throws CloneNotSupportedException {
         final LinkedList<T> copy = (LinkedList<T>)super.clone();
         final Entry<T> firstEntry = begin;
         copy.begin = begin;
