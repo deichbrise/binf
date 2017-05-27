@@ -1,5 +1,6 @@
 package com.week6.iterator;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -22,11 +23,16 @@ public class MyList<E> implements Cloneable, Iterable<E>{
     * References before the actual Entry of this List
     */
    private MyEntry<E> pos;
+   /**
+    * Counts the changes of List, to provide information for Iterator
+    */
+   private int changes;
 
    /**
     * Create a new empty List.
     */
    public MyList() {
+      changes = 0;
       pos = begin = new MyEntry<E>();
    }
 
@@ -98,6 +104,7 @@ public class MyList<E> implements Cloneable, Iterable<E>{
       MyEntry<E> newone = new MyEntry<E>(x, pos.next);
 
       pos.next = newone;
+      changes++;
    }
 
    /**
@@ -112,6 +119,7 @@ public class MyList<E> implements Cloneable, Iterable<E>{
          throw new NoSuchElementException("Already at the end of this List");
       }
       pos.next = pos.next.next;
+      changes++;
    }
 
    /**
@@ -160,6 +168,45 @@ public class MyList<E> implements Cloneable, Iterable<E>{
 
    @Override
    public Iterator<E> iterator() {
-      return null;
+      return new MyIterator(this);
+   }
+
+   /**
+    * Inner Class Iterator
+    */
+   public class MyIterator<E> {
+
+      private MyEntry<E> before;
+      private MyEntry<E> after;
+      private int count;
+
+      public MyIterator(MyList<E> list) {
+         after = (MyEntry<E>) begin;
+         count = changes;
+      }
+
+      public boolean hasNext() {
+         if (!isValidState()) throw new ConcurrentModificationException("Internal changes of list");
+         return after == null;
+      }
+
+      public Object next() {
+         if (!isValidState()) throw new ConcurrentModificationException("Internal changes of list");
+         if (!hasNext()) throw new NoSuchElementException("No more elements");
+         before = after;
+         after = before.next;
+         return before;
+      }
+
+      public void remove() {
+         if (!isValidState()) throw new ConcurrentModificationException("Internal changes of list");
+         if (!hasNext()) throw new NoSuchElementException("No more elements");
+         before.next = after.next;
+         after = after.next;
+      }
+
+      private boolean isValidState() {
+         return count == changes;
+      }
    }
 }
