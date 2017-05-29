@@ -26,7 +26,7 @@ public class MyList<E> implements Cloneable, Iterable<E>{
    /**
     * Counts the changes of List, to provide information for Iterator
     */
-   private int changes;
+   int changes;
 
    /**
     * Create a new empty List.
@@ -75,6 +75,7 @@ public class MyList<E> implements Cloneable, Iterable<E>{
          throw new NoSuchElementException("Already at the end of this List");
       }
       pos = pos.next;
+      changes++;
    }
 
    /**
@@ -174,32 +175,32 @@ public class MyList<E> implements Cloneable, Iterable<E>{
    /**
     * Inner Class Iterator
     */
-   public class MyIterator<E> {
+   protected class MyIterator<E> implements Iterator{
 
       private MyEntry<E> before;
       private MyEntry<E> after;
-      private int count;
+      public int count;
 
       public MyIterator(MyList<E> list) {
-         after = (MyEntry<E>) begin;
+         after = list.begin.next;
          count = changes;
       }
 
       public boolean hasNext() {
-         if (!isValidState()) throw new ConcurrentModificationException("Internal changes of list");
-         return after == null;
+         if (!isValidState()) throw new ConcurrentModificationException();
+         return after != null;
       }
 
-      public Object next() {
-         if (!isValidState()) throw new ConcurrentModificationException("Internal changes of list");
+      public E next() {
+         if (!isValidState()) throw new ConcurrentModificationException();
          if (!hasNext()) throw new NoSuchElementException("No more elements");
          before = after;
          after = before.next;
-         return before;
+         return before.o;
       }
 
       public void remove() {
-         if (!isValidState()) throw new ConcurrentModificationException("Internal changes of list");
+         if (!isValidState()) throw new ConcurrentModificationException();
          if (!hasNext()) throw new NoSuchElementException("No more elements");
          before.next = after.next;
          after = after.next;
