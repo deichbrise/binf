@@ -13,7 +13,7 @@ public class Fraction extends Number {
 
     public static final String REGEX_FRACTION = "-?[\\d]+(/[1-9]\\d*)?";
     public static final String REGEX_PURE_FRACTION = "-?[\\d]+(/[1-9]\\d*)";
-    public static final FractionRegistry fractionRegistry = new FractionRegistry();
+    public static final FractionObjectPool FRACTION_OBJECT_POOL = new FractionObjectPool();
 
     final private Integer numerator;
     final private Integer denominator;
@@ -46,23 +46,17 @@ public class Fraction extends Number {
         this(numerator, 1);
     }
 
-    public static Fraction ofValue(final Integer numerator) {
-        if(fractionRegistry.has( new Double( numerator ) )) {
-            return fractionRegistry.get( new Double( numerator ) );
-        } else {
-            final Fraction fraction = new Fraction( numerator );
-            fractionRegistry.add( fraction.doubleValue(), fraction );
-            return fraction;
-        }
+    public static Fraction getInstance( final Integer numerator) {
+        return getInstance( numerator, 1 );
     }
 
-    public static Fraction ofValue(final Integer numerator, final Integer denominator) {
+    public static Fraction getInstance( final Integer numerator, final Integer denominator) {
         final double value = numerator / (double)denominator;
-        if(fractionRegistry.has( value )) {
-            return fractionRegistry.get( value );
+        if( FRACTION_OBJECT_POOL.has( value )) {
+            return FRACTION_OBJECT_POOL.get( value );
         } else {
             final Fraction fraction = new Fraction( numerator, denominator );
-            fractionRegistry.add( fraction.doubleValue(), fraction );
+            FRACTION_OBJECT_POOL.add( fraction.doubleValue(), fraction );
             return fraction;
         }
     }
@@ -96,7 +90,7 @@ public class Fraction extends Number {
     public Fraction multiply( Fraction... factors) {
         Fraction buffer = this;
         for(Fraction fraction : factors) {
-            buffer = Fraction.ofValue( buffer.numerator * fraction.numerator , buffer.denominator * fraction.denominator );
+            buffer = Fraction.getInstance( buffer.numerator * fraction.numerator , buffer.denominator * fraction.denominator );
         }
         return buffer;
     }
@@ -108,7 +102,7 @@ public class Fraction extends Number {
      * @return einen neuen gekuerzten Bruch
      */
     public Fraction divide( Fraction divisor) {
-        return multiply( Fraction.ofValue( divisor.denominator, divisor.numerator ) );
+        return multiply( Fraction.getInstance( divisor.denominator, divisor.numerator ) );
     }
 
     /**
@@ -120,7 +114,7 @@ public class Fraction extends Number {
         final Integer newNumerator = this.getNumerator() * fraction.getDenominator() + fraction.getNumerator() * this.getDenominator();
         final Integer newDenominator = this.getDenominator() * fraction.getDenominator();
 
-        return Fraction.ofValue( newNumerator, newDenominator );
+        return Fraction.getInstance( newNumerator, newDenominator );
     }
 
     /**
@@ -145,10 +139,10 @@ public class Fraction extends Number {
             if(split.length > 1) {
                 final Integer numerator = Integer.parseInt( split[0] );
                 final Integer denominator = Integer.parseInt( split[1] );
-                return Fraction.ofValue( (isPositive ? 1 : -1) * numerator, denominator );
+                return Fraction.getInstance( (isPositive ? 1 : -1) * numerator, denominator );
             } else {
                 final Integer numerator = Integer.parseInt( split[0] );
-                return Fraction.ofValue( (isPositive ? 1 : -1) * numerator );
+                return Fraction.getInstance( (isPositive ? 1 : -1) * numerator );
             }
         } else {
             throw new NumberFormatException( "Cannot parse " + s );

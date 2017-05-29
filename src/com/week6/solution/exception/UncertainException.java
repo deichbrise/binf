@@ -82,6 +82,7 @@ public class UncertainException {
          }
       }
       //return i++;
+       // java: unreachable statement, da im finally-Block bereits ein Wert retourniert wird
    }
 
    public int uncertain3() {
@@ -156,13 +157,12 @@ public class UncertainException {
       }
    }
 
-   public int uncertain10() {
+   public int uncertain10() throws IOException{
       try {
+          //java: unreported exception java.io.IOException; must be caught or declared to be thrown
+          //Korrektur: Methodenkopf um throws IOException erweitert
          throw new java.io.IOException();
-      //} catch (RuntimeException e) {
-
-         // IOException ist eine checked Exception muss also behandelt werden, RuntimeException hingegen nicht.
-      } catch (IOException e) {
+      } catch (RuntimeException e) {
       }
       return 1;
 

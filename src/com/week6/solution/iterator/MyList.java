@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
  * @author Mathias Menninghaus (mathias.menninghaus@uos.de)
  * 
  */
-public class MyList<E> implements Cloneable, Iterable<E> {
+public class MyList<E> implements Cloneable, Iterable<E>{
 
    /**
     * Reference on the first Entry of this List
@@ -23,14 +23,16 @@ public class MyList<E> implements Cloneable, Iterable<E> {
     * References before the actual Entry of this List
     */
    private MyEntry<E> pos;
-
-   private boolean mod;
+   /**
+    * Counts the changes of List, to provide information for Iterator
+    */
+   int changes;
 
    /**
     * Create a new empty List.
     */
    public MyList() {
-      mod = false;
+      changes = 0;
       pos = begin = new MyEntry<E>();
    }
 
@@ -60,7 +62,6 @@ public class MyList<E> implements Cloneable, Iterable<E> {
     */
    public void reset() {
       pos = begin;
-      mod = true;
    }
 
    /**
@@ -74,7 +75,7 @@ public class MyList<E> implements Cloneable, Iterable<E> {
          throw new NoSuchElementException("Already at the end of this List");
       }
       pos = pos.next;
-      mod = true;
+      changes++;
    }
 
    /**
@@ -104,7 +105,7 @@ public class MyList<E> implements Cloneable, Iterable<E> {
       MyEntry<E> newone = new MyEntry<E>(x, pos.next);
 
       pos.next = newone;
-      mod = true;
+      changes++;
    }
 
    /**
@@ -119,12 +120,7 @@ public class MyList<E> implements Cloneable, Iterable<E> {
          throw new NoSuchElementException("Already at the end of this List");
       }
       pos.next = pos.next.next;
-      mod = true;
-   }
-
-   @Override
-   public Iterator<E> iterator() {
-      return new MyListIterator<E>( this );
+      changes++;
    }
 
    /**
@@ -171,48 +167,56 @@ public class MyList<E> implements Cloneable, Iterable<E> {
       return true;
    }
 
-   protected class MyListIterator<E> implements Iterator<E> {
-      private MyList<E> myList;
-      private boolean deletionInIteration;
+   @Override
+   public Iterator<E> iterator() {
+      return new MyIterator(this);
+   }
 
-      public MyListIterator( final MyList<E> myList ) {
-         this.myList = myList;
-         this.deletionInIteration = false;
-         this.myList.reset();
-         this.myList.mod = false;
+   /**
+    * Inner Class Iterator
+    */
+   protected class MyIterator<E> implements Iterator{
+
+      private MyEntry<E> before;
+      private MyEntry<E> after;
+      private int count;
+      private boolean removeAllowed;
+
+      public MyIterator(MyList<E> list) {
+         after = list.begin.next;
+         count = changes;
+         removeAllowed = false;
       }
 
       @Override
       public boolean hasNext() {
-         checkConcurrentModification();
-         return !myList.endpos();
+         if (!isValidState()) throw new ConcurrentModificationException();
+         return after != null;
       }
 
       @Override
       public E next() {
-         checkConcurrentModification();
-         final E current = myList.elem();
-         myList.advance();
-         myList.mod = false;
-         deletionInIteration = false;
-         return current;
+         if (!isValidState()) throw new ConcurrentModificationException();
+         if (!hasNext()) throw new NoSuchElementException("No more elements");
+         before = after;
+         after = before.next;
+         removeAllowed = true;
+         return before.o;
       }
 
       @Override
       public void remove() {
-         checkConcurrentModification();
-         if(deletionInIteration) {
-            throw new IllegalStateException( "One element is already deleted in this iteration." );
-         }
-         myList.delete();
-         myList.mod = false;
-         deletionInIteration = true;
+         if (!isValidState()) throw new ConcurrentModificationException();
+         if (!hasNext()) throw new NoSuchElementException("No more elements");
+         if(!removeAllowed) throw new IllegalStateException( "Only on remove per next call allowed." );
+         before.o = before.next.o;
+         before.next = before.next.next;
+         after = before.next;
+         removeAllowed = false;
       }
 
-      protected void checkConcurrentModification() {
-         if(myList.mod) {
-            throw new ConcurrentModificationException();
-         }
+      private boolean isValidState() {
+         return count == changes;
       }
    }
 }

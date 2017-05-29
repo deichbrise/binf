@@ -7,7 +7,7 @@ import java.util.Map;
  * @author pascalstammer
  * @version 27.05.17.
  */
-public class FractionRegistry {
+public class FractionObjectPool {
 
     private Map<Double, Fraction> registry = new HashMap<>();
     public boolean has(final Double key) {

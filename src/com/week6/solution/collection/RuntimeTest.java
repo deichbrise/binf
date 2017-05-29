@@ -1,4 +1,4 @@
-package com.week6.systemzeit;
+package com.week6.solution.collection;
 
 
 /**

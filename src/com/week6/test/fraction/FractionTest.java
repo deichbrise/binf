@@ -21,9 +21,9 @@ public class FractionTest extends AbstractTest {
 
     @Test
     public void testConstruction() {
-        final Fraction fraction1 = Fraction.ofValue( 1 );
-        final Fraction fraction2 = Fraction.ofValue( 1 );
-        final Fraction fraction3 = Fraction.ofValue( 2 );
+        final Fraction fraction1 = Fraction.getInstance( 1 );
+        final Fraction fraction2 = Fraction.getInstance( 1 );
+        final Fraction fraction3 = Fraction.getInstance( 2 );
 
         assertTrue( fraction1 == fraction2 );
         assertFalse( fraction1 == fraction3 );
@@ -41,10 +41,10 @@ public class FractionTest extends AbstractTest {
 
     @Test
     public void testSameReferenceIfMultiply() {
-        final Fraction fraction1 = Fraction.ofValue( 1, 2 );
-        final Fraction fraction2 = Fraction.ofValue( 1, 2 );
+        final Fraction fraction1 = Fraction.getInstance( 1, 2 );
+        final Fraction fraction2 = Fraction.getInstance( 1, 2 );
         final Fraction actualResult = fraction1.multiply( fraction2 );
-        final Fraction expectedResult = Fraction.ofValue( 1, 4 );
+        final Fraction expectedResult = Fraction.getInstance( 1, 4 );
 
         assertTrue( expectedResult == actualResult );
         assertEquals( 1, actualResult.getNumerator() );
@@ -53,10 +53,10 @@ public class FractionTest extends AbstractTest {
 
     @Test
     public void testSameReferenceIfAdded() {
-        final Fraction fraction1 = Fraction.ofValue( 1, 4 );
-        final Fraction fraction2 = Fraction.ofValue( 1, 4 );
+        final Fraction fraction1 = Fraction.getInstance( 1, 4 );
+        final Fraction fraction2 = Fraction.getInstance( 1, 4 );
         final Fraction actualResult = fraction1.add( fraction2 );
-        final Fraction expectedResult = Fraction.ofValue( 1, 2 );
+        final Fraction expectedResult = Fraction.getInstance( 1, 2 );
 
         assertTrue( expectedResult == actualResult );
         assertEquals( 1, actualResult.getNumerator() );

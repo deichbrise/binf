@@ -112,4 +112,24 @@ public class MyListIteratorTest extends AbstractTest {
         iter.remove();
         iter.remove();
     }
+
+    @Test
+    public void testDelete() {
+        final MyList<String> myList = new MyList<>();
+        myList.add( "String 1" );
+        myList.add( "String 2" );
+        myList.add( "String 3" );
+        myList.add( "String 4" );
+        myList.add( "String 5" );
+        myList.add( "String 6" );
+
+        final Iterator<String> iter = myList.iterator();
+
+        final String deletion = iter.next();
+        iter.remove();
+
+        myList.reset();
+
+        assertEquals( "String 5", myList.elem() );
+    }
 }
