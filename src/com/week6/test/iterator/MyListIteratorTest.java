@@ -131,5 +131,6 @@ public class MyListIteratorTest extends AbstractTest {
         myList.reset();
 
         assertEquals( "String 5", myList.elem() );
+        assertEquals( "String 5", iter.next() );
     }
 }

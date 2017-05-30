@@ -211,7 +211,7 @@ public class MyList<E> implements Cloneable, Iterable<E>{
          if(!removeAllowed) throw new IllegalStateException( "Only on remove per next call allowed." );
          before.o = before.next.o;
          before.next = before.next.next;
-         after = before.next;
+         after = before;
          removeAllowed = false;
       }
 
