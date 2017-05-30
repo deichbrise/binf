@@ -132,5 +132,14 @@ public class MyListIteratorTest extends AbstractTest {
 
         assertEquals( "String 5", myList.elem() );
         assertEquals( "String 5", iter.next() );
+        assertEquals( "String 4", iter.next() );
+        assertEquals( "String 3", iter.next() );
+
+        iter.remove();
+
+        assertEquals( "String 2", iter.next());
+        assertEquals( "String 1", iter.next());
+
+        assertFalse( iter.hasNext() );
     }
 }
