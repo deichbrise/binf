@@ -42,9 +42,11 @@ com.week6.solution.iterator
 com.week6.test.fraction
 com.week6.test.iterator
 com.week7.solution.enumeration
+com.week7.solution.io
 com.week7.solution.persistence
 com.week7.solution.persistence.impl
 com.week7.solution.visitor
 com.week7.test.enumeration
+com.week7.test.io
 com.week7.test.persistence.impl
 com.week7.test.visitor
