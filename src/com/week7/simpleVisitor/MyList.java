@@ -38,7 +38,7 @@ public class MyList<E> implements Cloneable, Iterable<E>, Visitable {
    public void accept(Visitor v) {
       boolean visit = true;
       reset();
-      while(!endpos()) {
+      while(!endpos() && visit) {
          pos.next.accept(v);
          advance();
       }
