@@ -2,6 +2,7 @@ package com.week7.solution.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.CharBuffer;
 import java.util.regex.Matcher;
@@ -19,6 +20,10 @@ public class LineReader implements Readable {
 
     private String lastLine;
     private Integer lineNumber;
+
+    public LineReader( final InputStream inputStream, String regex ) {
+        this(new InputStreamReader( inputStream), regex);
+    }
 
     public LineReader( final InputStreamReader inputStreamReader, String regex ) {
         this.inputStreamReader = inputStreamReader;
