@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
  */
 public class SearchLines {
     public static void main( String[] args ) throws IOException {
+        if (args.length < 1) throw new RuntimeException( "Cannot execute. Usage: java SearchLines String" );
         final String regex = args[0];
         final InputStream inputStream = System.in;
         final LineReader lineReader = new LineReader( new InputStreamReader( inputStream ), regex );
@@ -26,8 +27,8 @@ public class SearchLines {
         System.out.println();
         while(lastLine != null) {
             if(lineReader.getAmountOfMatches() > 0) {
-                System.out.print( StringUtil.padRight( Integer.toString(lineReader.getLineNumber()), lineNumberCaption.length() + 4 ) );
-                System.out.print( StringUtil.padRight( Integer.toString(lineReader.getAmountOfMatches()), numberOfOccurrencesCaption.length() + 4 ) );
+                System.out.print( StringUtil.padRight( Integer.toString(lineReader.getLineNumber()), lineNumberCaption.length() * 2 + 4 ) );
+                System.out.print( StringUtil.padRight( Integer.toString(lineReader.getAmountOfMatches()), numberOfOccurrencesCaption.length() * 2 + 4 ) );
                 System.out.print( lastLine );
                 System.out.println();
             }

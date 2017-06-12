@@ -46,17 +46,34 @@ public class SimplePersistentArray implements PersistentArray, AutoCloseable, It
         this.changesNumber = 0;
     }
 
+    /**
+     * Closes random access file stream and releases any system resources associated with the stream
+     * @throws Exception if an I/O error occurs
+     */
     @Override
     public void close() throws Exception {
         file.close();
     }
 
+    /**
+     * RandomAccessFile file will return the Integer at the position equivalent to index
+     * @param index of an array
+     * @return Integer at requested position
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public Integer get( final int index ) throws IOException {
         file.seek( index * SIZE );
         return file.readInt();
     }
 
+    /**
+     * Puts given Integer at the position equivalent to index and replaces former Integer
+     * Increases number of changes
+     * @param index of an array
+     * @param value new Integer to set
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public void set( final int index, final Integer value ) throws IOException {
         file.seek( index * SIZE );
@@ -64,16 +81,28 @@ public class SimplePersistentArray implements PersistentArray, AutoCloseable, It
         changesNumber++;
     }
 
+    /**
+     * Calculates the length of the array hidden in this RandomAccessFile
+     * @return int size of the array
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public int size() throws IOException {
         return (int) file.length() / SIZE;
     }
 
+    /**
+     * Creates and returns a BufferIterator which saves the current number of changes
+     * @return
+     */
     @Override
     public Iterator<Integer> iterator() {
         return new BufferIterator(this.changesNumber);
     }
 
+    /**
+     * Inner Class BufferIterator
+     */
     protected class BufferIterator implements Iterator<Integer> {
         private Integer changesSnapshot;
         private RandomAccessFile file;
@@ -85,6 +114,10 @@ public class SimplePersistentArray implements PersistentArray, AutoCloseable, It
             position = 0;
         }
 
+        /**
+         * Provides information whether File has more elements
+         * @return true if the current position is still below size of file
+         */
         @Override
         public boolean hasNext() {
             try {
@@ -94,6 +127,10 @@ public class SimplePersistentArray implements PersistentArray, AutoCloseable, It
             }
         }
 
+        /**
+         * Returns the next Integer if file has not been changed
+         * @return Integer at the next position
+         */
         @Override
         public Integer next() {
             if(changesNumber != changesSnapshot) {

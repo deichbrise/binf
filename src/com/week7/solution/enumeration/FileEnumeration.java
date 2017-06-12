@@ -27,6 +27,12 @@ public class FileEnumeration implements Visitable<File> {
         this.root = root;
     }
 
+    /**
+     * Root file of this FileEnumeration accepts Visitor
+     * If root is a directory, the method will be called recursively for all files in directory
+     * @param v
+     *           the Visitor which should be called for every element in this
+     */
     @Override
     public void accept( final Visitor<File> v ) {
         if(v.visit( root )) {
@@ -41,12 +47,23 @@ public class FileEnumeration implements Visitable<File> {
         }
     }
 
+    /**
+     * If this visitor is a FileVisitor, its current level of descent will be increased
+     * @param v visitor
+     * @param file
+     */
     protected void descendInDirectoryHook(Visitor<File> v, final File file) {
         if(FileVisitor.class.isAssignableFrom( v.getClass() )) {
             ((FileVisitor)v).descentInDirectory( file );
         }
     }
 
+    /**
+     * If this visitor is a FileVisitor, its current level of descent will be decreased
+     *
+     * @param v visitor
+     * @param file
+     */
     protected void completeDirectoryHook(Visitor<File> v, final File file) {
         if(FileVisitor.class.isAssignableFrom( v.getClass() )) {
             ((FileVisitor)v).completeDirectory( file );

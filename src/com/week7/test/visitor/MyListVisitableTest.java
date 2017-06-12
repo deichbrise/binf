@@ -19,6 +19,9 @@ public class MyListVisitableTest extends AbstractTest {
         new MyListVisitableTest().runAllTests();
     }
 
+    /**
+     * Tests SimpleStringListVisitor
+     */
     @Test
     public void testVistit() {
         final Visitor<String> visitor = new SimpleStringListVisitor();
@@ -50,6 +53,9 @@ public class MyListVisitableTest extends AbstractTest {
         assertTrue( result.contains( "string9" ) );
     }
 
+    /**
+     * Tests SimpleLimitedStringListVisitor
+     */
     @Test
     public void testVistitLimited() {
         final Visitor<String> visitor = new SimpleLimitedStringListVisitor(4);

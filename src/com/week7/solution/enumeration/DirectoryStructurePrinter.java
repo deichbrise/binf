@@ -28,16 +28,33 @@ public class DirectoryStructurePrinter implements FileVisitor {
         this(recursive ? 10 : 1);
     }
 
+    /**
+     * Increases the level of descent
+     * @param file
+     */
     @Override
     public void descentInDirectory( final File file ) {
         level++;
     }
 
+    /**
+     * Decreases the level of descent
+     * @param file
+     */
     @Override
     public void completeDirectory( final File file ) {
         level--;
     }
 
+    /**
+     * Visits given file, prints file name with indention according to current level
+     *
+     * @param o
+     *           the element that has just been visited by
+     *           {@link Visitable#accept(Visitor)}
+     * @return true if current level of descent is below maximal level
+     *         false if maximum level has been reached
+     */
     @Override
     public boolean visit( final File o ) {
         if(level <= maxLevel && canVisit) {

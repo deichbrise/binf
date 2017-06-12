@@ -32,6 +32,12 @@ public class LineReader implements Readable {
         this.lineNumber = -1;
     }
 
+    /**
+     * Reads one line via BufferedReader
+     * Increases count of read lines
+     * @return String last line which was read
+     * @throws IOException if an I/O error occurs
+     */
     public String readLine() throws IOException {
         lastLine = bufferedReader.readLine();
         if(lineNumber == -1) {
@@ -42,20 +48,34 @@ public class LineReader implements Readable {
         return lastLine;
     }
 
+    /**
+     * Gets number of read lines
+     * @return lineNumber calculated throughout the process of reading
+     */
     public Integer getLineNumber() {
         return lineNumber;
     }
 
+    /**
+     * Matcher interprets pattern, finds next match in last line
+     * Count of found matches is increased and returned
+     * @return Integer number of occurences
+     */
     public Integer getAmountOfMatches() {
         final Matcher matcher = pattern.matcher( lastLine );
         int count = 0;
         while(matcher.find()) {
             count++;
         }
-
         return count;
     }
 
+    /**
+     * Attempts to read characters into CharBuffer
+     * @param cb buffer to read characters into
+     * @return number of characters added to the buffer, or -1 if this source of characters is at its end
+     * @throws IOException  if an I/O error occurs
+     */
     @Override
     public int read( final CharBuffer cb ) throws IOException {
         return bufferedReader.read( cb );
