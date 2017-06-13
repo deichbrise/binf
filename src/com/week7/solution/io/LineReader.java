@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.Reader;
 import java.nio.CharBuffer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,38 +14,27 @@ import java.util.regex.Pattern;
  * @author pascalstammer
  * @version 12.06.17.
  */
-public class LineReader implements Readable {
+public class LineReader extends LineNumberReader {
 
-    private InputStreamReader inputStreamReader;
-    private BufferedReader bufferedReader;
     private Pattern pattern;
 
     private String lastLine;
     private Integer lineNumber;
 
-    public LineReader( final InputStream inputStream, String regex ) {
-        this(new InputStreamReader( inputStream), regex);
-    }
-
-    public LineReader( final InputStreamReader inputStreamReader, String regex ) {
-        this.inputStreamReader = inputStreamReader;
-        this.bufferedReader = new BufferedReader( inputStreamReader );
+    public LineReader( final Reader reader, String regex ) {
+        super(reader);
         this.pattern = Pattern.compile( regex );
         this.lineNumber = -1;
     }
 
     public String readLine() throws IOException {
-        lastLine = bufferedReader.readLine();
+        lastLine = super.readLine();
         if(lineNumber == -1) {
             lineNumber = 1;
         } else {
             lineNumber++;
         }
         return lastLine;
-    }
-
-    public Integer getLineNumber() {
-        return lineNumber;
     }
 
     public Integer getAmountOfMatches() {
@@ -54,10 +45,5 @@ public class LineReader implements Readable {
         }
 
         return count;
-    }
-
-    @Override
-    public int read( final CharBuffer cb ) throws IOException {
-        return bufferedReader.read( cb );
     }
 }
