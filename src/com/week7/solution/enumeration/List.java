@@ -19,9 +19,15 @@ public class List {
                 enumeration1.accept( new DirectoryStructurePrinter() );
                 break;
             case 1:
-                final FileEnumeration enumeration2 = new FileEnumeration(args[0]);
-                enumeration2.accept( new DirectoryStructurePrinter() );
-                break;
+                if(args[0].toLowerCase().equals( "-r" )) {
+                    final FileEnumeration enumeration4 = new FileEnumeration();
+                    enumeration4.accept( new DirectoryStructurePrinter(true) );
+                    break;
+                } else {
+                    final FileEnumeration enumeration2 = new FileEnumeration(args[0]);
+                    enumeration2.accept(new DirectoryStructurePrinter());
+                    break;
+                }
             case 2:
                 if(args[0].toLowerCase().equals( "-r" )) {
                     final FileEnumeration enumeration3 = new FileEnumeration( args[1] );

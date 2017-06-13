@@ -24,6 +24,7 @@ class MyEntry<E> implements Cloneable {
       this.next = e;
    }
 
+
    @Override
    public MyEntry<E> clone() {
       MyEntry<E> clone;

@@ -27,6 +27,12 @@ public class LineReader extends LineNumberReader {
         this.lineNumber = -1;
     }
 
+    /**
+     * Reads one line via BufferedReader
+     * Increases count of read lines
+     * @return String last line which was read
+     * @throws IOException if an I/O error occurs
+     */
     public String readLine() throws IOException {
         lastLine = super.readLine();
         if(lineNumber == -1) {
@@ -43,7 +49,6 @@ public class LineReader extends LineNumberReader {
         while(matcher.find()) {
             count++;
         }
-
         return count;
     }
 }

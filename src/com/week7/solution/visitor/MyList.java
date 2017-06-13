@@ -172,6 +172,12 @@ public class MyList<E> implements Cloneable, Iterable<E>, Visitable<E> {
       return new MyIterator(this);
    }
 
+   /**
+    * Iterator iterates through list and each element accepts given visitor
+    * Stops if visitor returns false
+    * @param v
+    *           the Visitor which should be called for every element in this
+    */
    @Override
    public void accept( final Visitor<E> v ) {
       final Iterator<E> iter = iterator();
