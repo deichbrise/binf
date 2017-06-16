@@ -36,8 +36,7 @@ public class List {
                     throw new RuntimeException( "Cannot execute. Usage: java List [-r] [PathToFileOrDirectory]" );
                 }
                 break;
-            default:
-                throw new RuntimeException( "Cannot execute. Usage: java List [-r] [PathToFileOrDirectory]" );
+            default: throw new RuntimeException( "Cannot execute. Usage: java List [-r] [PathToFileOrDirectory]" );
         }
     }
 }

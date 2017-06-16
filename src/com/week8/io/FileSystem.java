@@ -1,4 +1,4 @@
-package io;
+package com.week8.io;
 
 import java.io.File;
 import java.util.Arrays;
@@ -59,6 +59,7 @@ public class FileSystem {
 
       if (!currentFile.canRead()) {
          return v.visitFailed(currentFile);
+
       }
 
       if (currentFile.isDirectory()) {
@@ -87,6 +88,7 @@ public class FileSystem {
          }
       } else {
          return v.visitFile(currentFile);
+
 
       }
    }
