@@ -1,9 +1,14 @@
 package com.week8.heap;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.ObjectStreamField;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -42,6 +47,9 @@ public class Heap<E> implements Serializable{
    transient private final Comparator<? super E> comparator;
 
   // private static final ObjectStreamField[] serialPersistantFields = new ObjectStreamField[] {};
+
+
+
 
    public int getSize() {
       return size;
@@ -294,6 +302,31 @@ public class Heap<E> implements Serializable{
        * new child to the position of the child it has been swaped with.
        */
       heap[pos] = toInsert;
+   }
+
+   private void writeObject(ObjectOutputStream s) throws IOException {
+      final List<Object> copy = new ArrayList<>();
+      for(Object object : heap) {
+         if(object != null) {
+            copy.add( object );
+         }
+      }
+
+      final Object[] reduced = copy.toArray();
+      s.writeObject(reduced);
+   }
+
+   @SuppressWarnings( "unchecked" )
+   private void readObject(ObjectInputStream s) throws IOException {
+      this.heap = new Object[DEFAULT_INITIAL_CAPACITY];
+      try {
+         final Object[] o = (Object[]) s.readObject();
+         for(Object o1 : o) {
+            insert( (E)o1 );
+         }
+      } catch ( ClassNotFoundException e ) {
+         throw new IOException( e.getMessage(), e );
+      }
    }
 
    @SuppressWarnings("unchecked")

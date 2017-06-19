@@ -12,27 +12,30 @@ import java.io.InputStreamReader;
  * @version 12.06.17.
  */
 public class SearchLines {
-    public static void main( String[] args ) throws IOException {
+    public static void main( String[] args ) {
         if (args.length < 1) throw new RuntimeException( "Cannot execute. Usage: java SearchLines String" );
         final String regex = args[0];
         final InputStream inputStream = System.in;
-        final LineReader lineReader = new LineReader( new InputStreamReader( inputStream ), regex );
-        String lastLine = lineReader.readLine();
-        final String lineNumberCaption = "Line Number";
-        final String numberOfOccurrencesCaption = "Number of Matches";
-        final String lineCaption = "Line Content";
-        System.out.print( StringUtil.padRight( lineNumberCaption, lineNumberCaption.length() + 4 ) );
-        System.out.print( StringUtil.padRight( numberOfOccurrencesCaption, numberOfOccurrencesCaption.length() + 4 ) );
-        System.out.print( StringUtil.padRight( lineCaption, lineCaption.length() + 4 ) );
-        System.out.println();
-        while(lastLine != null) {
-            if(lineReader.getAmountOfMatches() > 0) {
-                System.out.print( StringUtil.padRight( Integer.toString(lineReader.getLineNumber()), lineNumberCaption.length() * 2 + 4 ) );
-                System.out.print( StringUtil.padRight( Integer.toString(lineReader.getAmountOfMatches()), numberOfOccurrencesCaption.length() * 2 + 4 ) );
-                System.out.print( lastLine );
-                System.out.println();
+        try (LineReader lineReader = new LineReader( new InputStreamReader( inputStream ), regex )) {
+            String lastLine = lineReader.readLine();
+            final String lineNumberCaption = "Line Number";
+            final String numberOfOccurrencesCaption = "Number of Matches";
+            final String lineCaption = "Line Content";
+            System.out.print( StringUtil.padRight( lineNumberCaption, lineNumberCaption.length() + 4 ) );
+            System.out.print( StringUtil.padRight( numberOfOccurrencesCaption, numberOfOccurrencesCaption.length() + 4 ) );
+            System.out.print( StringUtil.padRight( lineCaption, lineCaption.length() + 4 ) );
+            System.out.println();
+            while(lastLine != null) {
+                if(lineReader.getAmountOfMatches() > 0) {
+                    System.out.print( StringUtil.padRight( Integer.toString(lineReader.getLineNumber()), lineNumberCaption.length() * 2 + 4 ) );
+                    System.out.print( StringUtil.padRight( Integer.toString(lineReader.getAmountOfMatches()), numberOfOccurrencesCaption.length() * 2 + 4 ) );
+                    System.out.print( StringUtil.clean( lastLine) );
+                    System.out.println();
+                }
+                lastLine = lineReader.readLine();
             }
-            lastLine = lineReader.readLine();
+        } catch (final Exception e) {
+            throw new RuntimeException( e.getMessage(), e );
         }
     }
 }

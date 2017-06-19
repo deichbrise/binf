@@ -15,12 +15,10 @@ public class LineReader extends LineNumberReader {
     private Pattern pattern;
 
     private String lastLine;
-    private Integer lineNumber;
 
     public LineReader( final Reader reader, String regex ) {
         super( reader );
         this.pattern = Pattern.compile( regex );
-        this.lineNumber = -1;
     }
 
     /**
@@ -32,11 +30,6 @@ public class LineReader extends LineNumberReader {
      */
     public String readLine() throws IOException {
         lastLine = super.readLine();
-        if ( lineNumber == -1 ) {
-            lineNumber = 1;
-        } else {
-            lineNumber++;
-        }
         return lastLine;
     }
 
