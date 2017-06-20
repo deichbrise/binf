@@ -304,6 +304,11 @@ public class Heap<E> implements Serializable{
       heap[pos] = toInsert;
    }
 
+   /**
+    * Override the standard serialization. Save a array without any null values.
+    * @param s the ObjectOutputStream to write to
+    * @throws IOException
+     */
    private void writeObject(ObjectOutputStream s) throws IOException {
       final List<Object> copy = new ArrayList<>();
       for(Object object : heap) {
@@ -316,6 +321,11 @@ public class Heap<E> implements Serializable{
       s.writeObject(reduced);
    }
 
+   /**
+    * Override the standard deserialization.
+    * @param s
+    * @throws IOException
+     */
    @SuppressWarnings( "unchecked" )
    private void readObject(ObjectInputStream s) throws IOException {
       this.heap = new Object[DEFAULT_INITIAL_CAPACITY];

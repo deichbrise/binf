@@ -13,6 +13,12 @@ public class Replace {
     private static String replacement;
     private static String path;
 
+    /**
+     * Read a file and convert content in string.
+     *
+     * @param path file path
+     * @return file to string
+     */
     private static String getCompleteString(String path) {
         String whole = "";
         String lastLine;
@@ -32,6 +38,11 @@ public class Replace {
         return "";
     }
 
+    /**
+     * Write String back to file
+     * @param path
+     * @param complete
+     */
     private static void putBackInFile(String path, String complete) {
         try (BufferedWriter buf = new BufferedWriter(new FileWriter(path))) {
             buf.write(complete);
@@ -42,6 +53,12 @@ public class Replace {
         }
     }
 
+    /**
+     * Check for correct usage.
+     *
+     * @param args
+     * @return
+     */
     private static boolean correctUsage(String[] args) {
         int length = args.length;
         switch (length) {
@@ -69,7 +86,7 @@ public class Replace {
 
     }
 
-    protected static class MyVisitor implements FileVisitor{
+    protected static class MyVisitor implements FileVisitor {
 
         @Override
         public FileVisitResult postVisitDirectory(File dir) {
