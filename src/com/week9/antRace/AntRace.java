@@ -12,7 +12,6 @@ public class AntRace implements AntFields {
 		Thread myThread = new Thread(ant);
 		myThread.start();
 		Runtime.getRuntime().addShutdownHook(new EndingThread(field));
-
 	}
 
 	/**
