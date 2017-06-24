@@ -57,4 +57,13 @@ com.week8.io
 com.week8.standardserialisierung
 com.week9.antRace
 com.week9.io
+com.week9.solution.thread
+com.week9.solution.thread.collector
+com.week9.solution.thread.collector.impl
+com.week9.solution.thread.observable
+com.week9.solution.thread.observable.impl
+com.week9.solution.thread.strategy
+com.week9.solution.thread.strategy.impl
+com.week9.solution.thread.task.impl
+com.week9.solution.thread.util
 com.week9.timertask
