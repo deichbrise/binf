@@ -20,4 +20,12 @@ public class StringUtil {
         return String.format("%1$" + (n + s.length()) + "s", s);
     }
 
+    public static String removeWhitespaces(final String s) {
+        return s.replaceAll("\\s+","");
+    }
+
+    public static String removeTrailingWhitespaces(final String s) {
+        return s.trim();
+    }
+
 }
