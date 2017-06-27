@@ -61,6 +61,8 @@ public class ApplicationTest extends AbstractTest {
                 sleep();
             }
 
+            System.exit( 0 );
+
         } catch ( IOException e ) {
             e.printStackTrace();
         }
