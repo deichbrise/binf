@@ -11,8 +11,9 @@ import java.util.Map;
 import java.util.TimerTask;
 
 /**
- * @author pascalstammer
- * @version 24.06.17.
+ * detect changes in file size in a given interval.
+ *
+ * @author Pascal Stammer (stammer@deichbrise.de)
  */
 public class FileSizeChangeDetectionTask extends TimerTask {
 

@@ -7,8 +7,8 @@ import com.week9.solution.thread.strategy.FileObservableStrategy;
 import java.io.File;
 
 /**
- * @author pascalstammer
- * @version 24.06.17.
+ * Creates a new File Observable
+ * @author Pascal Stammer (stammer@deichbrise.de)
  */
 public class FileSizeChangeObservableStrategyImpl implements FileObservableStrategy {
 

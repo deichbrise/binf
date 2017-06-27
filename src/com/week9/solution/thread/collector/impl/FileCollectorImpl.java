@@ -8,13 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author pascalstammer
- * @version 24.06.17.
+ * Collect files starting with a given root file object. It is possible to define specific file filter to exclude
+ * files with specific rules.
+ *
+ * @author Pascal Stammer (stammer@deichbrise.de)
  */
 public class FileCollectorImpl implements FileCollector {
 
     private List<FileFilter> fileFilters = new ArrayList<>();
 
+    /**
+     * Collect files within the given file. If file is a file only the file is returned. Else all files in folder
+     * are recursively collected.
+     *
+     * @param root file
+     * @return a list of files
+     */
     @Override
     public List<File> collect( final File root ) {
         final List<File> result = new ArrayList<>();
@@ -43,6 +52,11 @@ public class FileCollectorImpl implements FileCollector {
         return true;
     }
 
+    /**
+     * Add a filter
+     * @param fileFilter
+     * @return
+     */
     @Override
     public FileCollector addFilter( final FileFilter fileFilter ) {
         fileFilters.add( fileFilter );

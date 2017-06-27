@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * @author pascalstammer
- * @version 24.06.17.
+ * @author Pascal Stammer (stammer@deichbrise.de)
  */
 public interface FileCollector {
     public List<File> collect(File root);

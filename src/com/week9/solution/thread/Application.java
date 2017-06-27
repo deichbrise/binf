@@ -21,11 +21,19 @@ public class Application {
 
     public static void main( String[] args ) {
         final Application application = new Application();
-        application.execute( "./" );
+        if(args.length == 0) {
+            application.execute( "./" );
+        } else {
+            application.execute( args[0] );
+        }
+
     }
 
-    public void execute(final String fileName) {
+    public void execute(final String fileName, final Subscription<File>... subscriptions ) {
         final File file = new File( fileName );
+        if(!file.exists()) {
+            System.err.println("Wrong argument. " + fileName + " is not a file or directory.");
+        }
         final FileObservableStrategy strategy = new FileSizeChangeObservableStrategyImpl();
         final Observable<File> observable = strategy.observe( file );
 
@@ -40,5 +48,9 @@ public class Application {
                 log.info( "Unsubscribe file " + file.getAbsolutePath() );
             }
         } );
+
+        for(final Subscription<File> subscription : subscriptions) {
+            observable.subscribe( subscription );
+        }
     }
 }

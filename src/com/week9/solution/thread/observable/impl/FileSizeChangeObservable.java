@@ -11,6 +11,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * Detect changes in file size in a specified interval.
+ *
  * @author pascalstammer
  * @version 24.06.17.
  */

@@ -8,8 +8,7 @@ import java.io.FileReader;
 import java.util.concurrent.Callable;
 
 /**
- * @author pascalstammer
- * @version 24.06.17.
+ * @author Pascal Stammer (stammer@deichbrise.de)
  */
 public class SearchLineMinion implements Callable<SearchLineMinionResult> {
     private final File file;
