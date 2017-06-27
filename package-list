@@ -71,4 +71,6 @@ com.week9.solution.thread.strategy
 com.week9.solution.thread.strategy.impl
 com.week9.solution.thread.task.impl
 com.week9.solution.thread.util
+com.week9.test.io
+com.week9.test.thread
 com.week9.timertask
